@@ -133,16 +133,20 @@ def check_daily_limit(user_id):
 def increment_daily_limit(user_id):
     user_usage[user_id]["count"] += 1
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=15))
 def call_gemini_with_retry(prompt, system_instruction):
-    return client.models.generate_content(
-        model='gemini-3.6-flash',
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            system_instruction=system_instruction,
-            temperature=0.7
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=system_instruction,
+                temperature=0.7
+            )
         )
-    )
+        return response
+    except Exception as e:
+        print(f"Gemini API Error: {e}")
+        raise
 
 @app.route("/")
 def login():
