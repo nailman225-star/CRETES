@@ -4,8 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ subject_name }} - منصة قمم</title>
-    <style>
-        :root { --primary-color: #4CAF50; --primary-dark: #388E3C; --bg-color: #f5f7fa; --chat-bg: #ffffff; --text-color: #333333; --user-msg-bg: #e8f5e9; --bot-msg-bg: #f0f0f0; --border-color: #e0e0e0; }
+    <style>        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --chat-bg: #ffffff;
+            --user-msg-bg: #e8f5e9;
+            --bot-msg-bg: #f1f3f4;
+            --border-color: #e0e0e0;
+            --chat-font-size: 1.2rem;
+        }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
         
         .layout-container { display: flex; flex-grow: 1; overflow: hidden; }
@@ -30,6 +39,8 @@
         .header-controls { display: flex; align-items: center; gap: 15px; }
         .lang-select { padding: 5px 10px; border-radius: 20px; border: none; outline: none; font-family: inherit; background-color: rgba(255, 255, 255, 0.2); color: white; font-weight: bold; cursor: pointer; }
         .lang-select option { color: black; }
+        .zoom-btn { background: rgba(255,255,255,0.2); color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: background 0.3s; }
+        .zoom-btn:hover { background: rgba(255,255,255,0.4); }
         .status-bar { font-size: 0.85em; color: #eeeeee; }
         .messages-container { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .message-wrapper { display: flex; align-items: flex-end; gap: 10px; max-width: 85%; }
@@ -40,7 +51,7 @@
         html[dir="ltr"] .message-wrapper.user { align-self: flex-end; flex-direction: row-reverse; }
         html[dir="ltr"] .message-wrapper.bot { align-self: flex-start; flex-direction: row; }
         
-        .message { padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 1rem; }
+        .message { padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: var(--chat-font-size); }
         
         html[dir="rtl"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-right-radius: 0; }
         html[dir="rtl"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-left-radius: 0; }
@@ -48,13 +59,13 @@
         html[dir="ltr"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-left-radius: 0; }
         html[dir="ltr"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-right-radius: 0; }
         
-        .msg-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); font-size: 1rem; flex-shrink: 0; }
+        .msg-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); font-size: var(--chat-font-size); flex-shrink: 0; }
         .message-wrapper.user .msg-icon { background-color: #cfd8dc; }
         .message-wrapper.bot .msg-icon { background-color: var(--primary-color); color: white; }
         .input-area { padding: 15px; background-color: #fafafa; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .input-area input { flex-grow: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: 25px; outline: none; font-size: 1rem; transition: border-color 0.3s; }
+        .input-area input { flex-grow: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: 25px; outline: none; font-size: var(--chat-font-size); transition: border-color 0.3s; }
         .input-area input:focus { border-color: var(--primary-color); }
-        .input-area button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s; }
+        .input-area button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-size: var(--chat-font-size); font-weight: bold; transition: background-color 0.3s; }
         .input-area button:hover { background-color: var(--primary-dark); }
         .input-area button:disabled { background-color: #cccccc; cursor: not-allowed; }
         .loading { align-self: flex-end; color: #888; font-style: italic; display: none; margin: 0 40px; }
@@ -101,6 +112,8 @@
                     <span id="chat-title">{{ tutor_name }} - {{ subject_name }}</span>
                 </div>
                 <div class="header-controls">
+                    <button onclick="zoomChat(0.1)" class="zoom-btn" title="تكبير الخط">A+</button>
+                    <button onclick="zoomChat(-0.1)" class="zoom-btn" title="تصغير الخط">A-</button>
                     <select id="ui-lang" class="lang-select" onchange="changeLang(this.value)">
                         <option value="ar">العربية</option>
                         <option value="fr">Français</option>
@@ -159,6 +172,14 @@
                 "rem": "Messages:", "motto": "Your ascent to the peak starts here"
             }
         };
+
+        let currentZoom = 1.2;
+        function zoomChat(step) {
+            currentZoom += step;
+            if (currentZoom < 0.8) currentZoom = 0.8;
+            if (currentZoom > 3.0) currentZoom = 3.0;
+            document.documentElement.style.setProperty('--chat-font-size', currentZoom + 'rem');
+        }
 
         function changeLang(lang) {
             localStorage.setItem("ui_lang", lang);

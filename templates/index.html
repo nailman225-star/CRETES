@@ -161,7 +161,13 @@
         <div class="grid">
             {% for subject in subjects %}
             <a href="/subject/{{ subject.id }}" class="card">
-                <div class="card-icon">{{ subject.emoji }}</div>
+                <div class="card-icon">
+                    {% if subject.custom_image %}
+                    <img src="{{ subject.custom_image }}" alt="icon" style="height: 1.2em; width: 1.2em; object-fit: contain; vertical-align: middle;">
+                    {% else %}
+                    {{ subject.emoji }}
+                    {% endif %}
+                </div>
                 <h3 class="card-title" data-i18n="sub_{{ subject.id }}">{{ subject.name }}</h3>
                 <p class="card-desc" data-i18n="desc_{{ subject.id }}">انقر للتحدث مع {{ subject.tutor }}</p>
             </a>

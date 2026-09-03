@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
@@ -34,7 +34,7 @@ SUBJECTS = {
     "islamic": {"name": "التربية الإسلامية", "tutor": "الأستاذ مالك", "emoji": "🕌", "tutor_emoji": "👳‍♂️"},
     "arabic": {"name": "اللغة العربية", "tutor": "الأستاذ سيبويه", "emoji": "📖", "tutor_emoji": "👨‍🏫"},
     "french": {"name": "الفرنسية", "tutor": "Prof. Molière", "emoji": "🗼", "tutor_emoji": "👨‍🏫"},
-    "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "🕰️", "tutor_emoji": "👨‍🏫"},
+    "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "", "custom_image": "BigBen.png", "tutor_emoji": "👨‍🏫"},
     "informatique": {"name": "المعلوميات", "tutor": "الأستاذ تورينغ", "emoji": "💻", "tutor_emoji": "👨‍💻"},
     "history": {"name": "الاجتماعيات", "tutor": "الأستاذ ابن خلدون", "emoji": "🌍", "tutor_emoji": "🧔"}
 }
@@ -163,7 +163,7 @@ def index():
             "name": info["name"],
             "tutor": info["tutor"],
             "emoji": info["emoji"],
-            "image": f"/data/{img_name}" if img_name else ""
+            "custom_image": f"/data/{info['custom_image']}" if "custom_image" in info else ""
         })
         
     return render_template("index.html", subjects=subjects_list)
