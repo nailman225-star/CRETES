@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-tag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ subject_name }} - منصة قمم</title>
+    <style>
+        :root { --primary-color: #4CAF50; --primary-dark: #388E3C; --bg-color: #f5f7fa; --chat-bg: #ffffff; --text-color: #333333; --user-msg-bg: #e8f5e9; --bot-msg-bg: #f0f0f0; --border-color: #e0e0e0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+        
+        /* Top Navigation Bar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            flex-shrink: 0;
+        }
+        
+        .layout-container { display: flex; flex-grow: 1; overflow: hidden; }
+        
+        .sidebar { width: 300px; background: linear-gradient(135deg, #2E7D32, #4CAF50); color: white; padding: 20px; display: flex; flex-direction: column; gap: 20px; box-shadow: 2px 0 10px rgba(0,0,0,0.1); overflow-y: auto;}
+        html[dir="ltr"] .sidebar { box-shadow: -2px 0 10px rgba(0,0,0,0.1); }
+        .sidebar h2 { margin: 0; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; text-align: center; }
+        .sidebar-section { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; }
+        .sidebar-section h3 { margin-top: 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px; }
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { margin-bottom: 10px; }
+        .sidebar-list a { color: #fff; text-decoration: none; display: block; padding: 8px; background: rgba(0,0,0,0.15); border-radius: 5px; transition: background 0.3s; }
+        .sidebar-list a:hover { background: rgba(0,0,0,0.3); }
+        .back-btn { background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 10px; border-radius: 20px; text-align: center; font-weight: bold; display: block; margin-top: auto; transition: background 0.3s; }
+        .back-btn:hover { background: rgba(255,255,255,0.3); }
+        
+        .main-content { flex-grow: 1; display: flex; padding: 20px; }
+        .chat-container { width: 100%; flex-grow: 1; background-color: var(--chat-bg); border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+        .header { background-color: var(--primary-color); color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .header-title { font-size: 1.5em; font-weight: bold; display: flex; align-items: center; gap: 12px; margin: 0; }
+        .icon-badge { background-color: white; color: var(--primary-dark); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .header-controls { display: flex; align-items: center; gap: 15px; }
+        .lang-select { padding: 5px 10px; border-radius: 20px; border: none; outline: none; font-family: inherit; background-color: rgba(255, 255, 255, 0.2); color: white; font-weight: bold; cursor: pointer; }
+        .lang-select option { color: black; }
+        .status-bar { font-size: 0.85em; color: #eeeeee; }
+        .messages-container { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message-wrapper { display: flex; align-items: flex-end; gap: 10px; max-width: 85%; }
+        
+        html[dir="rtl"] .message-wrapper.user { align-self: flex-start; flex-direction: row; }
+        html[dir="rtl"] .message-wrapper.bot { align-self: flex-end; flex-direction: row-reverse; }
+        
+        html[dir="ltr"] .message-wrapper.user { align-self: flex-end; flex-direction: row-reverse; }
+        html[dir="ltr"] .message-wrapper.bot { align-self: flex-start; flex-direction: row; }
+        
+        .message { padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 1rem; }
+        
+        html[dir="rtl"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-right-radius: 0; }
+        html[dir="rtl"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-left-radius: 0; }
+        
+        html[dir="ltr"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-left-radius: 0; }
+        html[dir="ltr"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-right-radius: 0; }
+        
+        .msg-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); font-size: 1rem; flex-shrink: 0; }
+        .message-wrapper.user .msg-icon { background-color: #cfd8dc; }
+        .message-wrapper.bot .msg-icon { background-color: var(--primary-color); color: white; }
+        .input-area { padding: 15px; background-color: #fafafa; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .input-area input { flex-grow: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: 25px; outline: none; font-size: 1rem; transition: border-color 0.3s; }
+        .input-area input:focus { border-color: var(--primary-color); }
+        .input-area button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s; }
+        .input-area button:hover { background-color: var(--primary-dark); }
+        .input-area button:disabled { background-color: #cccccc; cursor: not-allowed; }
+        .loading { align-self: flex-end; color: #888; font-style: italic; display: none; margin: 0 40px; }
+        
+        /* Markdown Styles */
+        .message a { color: #1976D2; text-decoration: none; word-break: break-word; font-weight: bold; display: inline-block; }
+        .message a:hover { text-decoration: underline; }
+        .message img { max-width: 100%; border-radius: 8px; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: block; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Platform Header -->
+        <header class="top-nav">
+        <div class="nav-right" style="display: flex; align-items: center; gap: 30px;">
+            <div class="brand-ar" style="font-size: 1.6rem; font-weight: 900; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 2rem;">🎓</span>
+                <span>منصة قمم التعليمية</span>
+            </div>
+            <div class="lang-switch">
+                <select id="ui-lang" class="lang-select" onchange="changeLang(this.value)" style="padding: 5px 15px; border-radius: 20px; border: 1px solid #ccc;">
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="nav-left" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
+            <span class="brand-fr" style="font-size: 1.1rem; font-weight: bold; color: #2c3e50; letter-spacing: 0.5px;">Plateforme Éducative LES CRETES</span>
+        </div>
+    </header>
+
+    <div class="layout-container">
+        <div class="sidebar">
+            <h2 id="sb-title">{{ subject_name }}</h2>
+            <h3 id="sb-lessons">📚 المقررات والدروس</h3>
+            <ul class="sidebar-list">
+                <li><a href="#" id="sb-link1">الوحدة الأولى</a></li>
+                <li><a href="#" id="sb-link2">الوحدة الثانية</a></li>
+                <li><a href="#" id="sb-link3">الوحدة الثالثة</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3 id="sb-exams">📝 التمارين والامتحانات</h3>
+            <ul class="sidebar-list">
+                <li><a href="#" id="sb-link4">تمارين تطبيقية</a></li>
+                <li><a href="#" id="sb-link5">فروض محروسة</a></li>
+            </ul>
+        </div>
+        
+        <a href="/dashboard" class="back-btn" id="sb-back">🏠 العودة للرئيسية</a>
+    </div>
+
+    <div class="main-content">
+        <div class="chat-container">
+            <div class="header">
+                <div class="header-title">
+                    <div class="icon-badge">{{ tutor_emoji }}</div>
+                    <span id="chat-title">{{ tutor_name }} - {{ subject_name }}</span>
+                </div>
+                <div class="header-controls">
+                    <span class="status-bar" id="remaining-count">الرسائل المتبقية: 30</span>
+                </div>
+            </div>
+            
+            <div class="messages-container" id="messages">
+                <div class="message-wrapper bot">
+                    <div class="msg-icon">{{ tutor_emoji }}</div>
+                    <div class="message" id="welcome-msg">مرحباً بك! أنا {{ tutor_name }}، مدرسك الذكي. كيف يمكنني مساعدتك اليوم؟</div>
+                </div>
+                <div class="loading" id="loading-indicator">جارِ الكتابة...</div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." onkeypress="handleKeyPress(event)">
+                <button id="send-btn" onclick="sendMessage()">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const subject_id = "{{ subject_id }}";
+        const tutor_name = "{{ tutor_name }}";
+        const tutor_emoji = "{{ tutor_emoji }}";
+        
+        const studentName = localStorage.getItem('student_name') || 'التلميذ';
+        
+        const translations = {
+            "ar": {
+                "sb_lessons": "📚 المقررات والدروس", "sb_exams": "📝 التمارين والامتحانات",
+                "sb_link1": "الوحدة الأولى", "sb_link2": "الوحدة الثانية", "sb_link3": "الوحدة الثالثة",
+                "sb_link4": "تمارين تطبيقية", "sb_link5": "فروض محروسة", "sb_back": "🏠 العودة للرئيسية",
+                "placeholder": "اكتب سؤالك هنا...", "send": "إرسال", "loading": "جارِ الكتابة...",
+                "welcome": `مرحباً بك يا ${studentName}! أنا ${tutor_name}، مدرسك الذكي. كيف يمكنني مساعدتك اليوم؟`,
+                "rem": "الرسائل:", "motto": "خطاك نحو القمة تبدأ من هنا"
+            },
+            "fr": {
+                "sb_lessons": "📚 Cours et Leçons", "sb_exams": "📝 Exercices et Examens",
+                "sb_link1": "Unité 1", "sb_link2": "Unité 2", "sb_link3": "Unité 3",
+                "sb_link4": "Exercices Pratiques", "sb_link5": "Contrôles", "sb_back": "🏠 Retour à l'accueil",
+                "placeholder": "Écrivez votre question ici...", "send": "Envoyer", "loading": "En train d'écrire...",
+                "welcome": `Bonjour ${studentName}! Je suis ${tutor_name}, votre professeur intelligent. Comment puis-je vous aider aujourd'hui?`,
+                "rem": "Messages:", "motto": "Votre ascension vers le sommet commence ici"
+            },
+            "en": {
+                "sb_lessons": "📚 Courses and Lessons", "sb_exams": "📝 Exercises and Exams",
+                "sb_link1": "Unit 1", "sb_link2": "Unit 2", "sb_link3": "Unit 3",
+                "sb_link4": "Practical Exercises", "sb_link5": "Quizzes", "sb_back": "🏠 Back to Home",
+                "placeholder": "Type your question here...", "send": "Send", "loading": "Typing...",
+                "welcome": `Hello ${studentName}! I am ${tutor_name}, your smart tutor. How can I help you today?`,
+                "rem": "Messages:", "motto": "Your ascent to the peak starts here"
+            }
+        };
+
+        function changeLang(lang) {
+            localStorage.setItem("ui_lang", lang);
+            document.getElementById("html-tag").dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById("ui-lang").value = lang;
+            
+            document.getElementById("sb-lessons").textContent = translations[lang]["sb_lessons"];
+            document.getElementById("sb-exams").textContent = translations[lang]["sb_exams"];
+            document.getElementById("sb-link1").textContent = translations[lang]["sb_link1"];
+            document.getElementById("sb-link2").textContent = translations[lang]["sb_link2"];
+            document.getElementById("sb-link3").textContent = translations[lang]["sb_link3"];
+            document.getElementById("sb-link4").textContent = translations[lang]["sb_link4"];
+            document.getElementById("sb-link5").textContent = translations[lang]["sb_link5"];
+            document.getElementById("sb-back").textContent = translations[lang]["sb_back"];
+            
+            document.getElementById("user-input").placeholder = translations[lang]["placeholder"];
+            document.getElementById("send-btn").textContent = translations[lang]["send"];
+            document.getElementById("loading-indicator").textContent = translations[lang]["loading"];
+            
+            // Re-render the remaining messages text if not changed by the backend
+            let remText = document.getElementById("remaining-count").textContent;
+            let num = remText.replace(/[^0-9]/g, '') || "30";
+            document.getElementById("remaining-count").textContent = translations[lang]["rem"] + " " + num;
+            
+            // Only update welcome msg if it hasn't been overwritten
+            document.getElementById("welcome-msg").textContent = translations[lang]["welcome"];
+        }
+
+        window.onload = () => {
+            if(!localStorage.getItem('student_name')) {
+                window.location.href = '/';
+                return;
+            }
+            const savedLang = localStorage.getItem("ui_lang") || "ar";
+            changeLang(savedLang);
+        }
+
+        const messagesContainer = document.getElementById('messages');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const remainingCountSpan = document.getElementById('remaining-count');
+
+        function appendMessage(sender, text) {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('message-wrapper', sender);
+            
+            const iconDiv = document.createElement('div');
+            iconDiv.classList.add('msg-icon');
+            iconDiv.innerHTML = sender === 'bot' ? tutor_emoji : '🎓';
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message');
+            
+            if (sender === 'bot') {
+                marked.setOptions({ breaks: true });
+                msgDiv.innerHTML = marked.parse(text);
+                
+                msgDiv.querySelectorAll('a').forEach(a => {
+                    a.setAttribute('target', '_blank');
+                    a.setAttribute('rel', 'noopener noreferrer');
+                });
+            } else {
+                msgDiv.textContent = text;
+            }
+            
+            wrapper.appendChild(iconDiv);
+            wrapper.appendChild(msgDiv);
+            
+            messagesContainer.insertBefore(wrapper, loadingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendMessage('user', text);
+            userInput.value = '';
+            
+            userInput.disabled = true;
+            sendBtn.disabled = true;
+            loadingIndicator.style.display = 'block';
+            
+            const selectedLang = document.getElementById("ui-lang").value;
+            const langName = selectedLang === 'fr' ? 'Français' : (selectedLang === 'en' ? 'English' : 'العربية');
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text, language: langName, subject_id: subject_id, student_name: studentName })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    appendMessage('bot', data.response);
+                    if (data.remaining !== undefined) {
+                        const langPrefix = translations[selectedLang]["rem"];
+                        remainingCountSpan.innerText = `${langPrefix} ${data.remaining}`;
+                    }
+                } else {
+                    appendMessage('bot', `❌ خطأ: ${data.error || 'حدث خطأ'}`);
+                }
+            } catch (error) {
+                appendMessage('bot', `❌ خطأ في الاتصال: ${error.message}`);
+            } finally {
+                userInput.disabled = false;
+                sendBtn.disabled = false;
+                loadingIndicator.style.display = 'none';
+                userInput.focus();
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>

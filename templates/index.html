@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-tag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">منصة قمم - الأولى باكالوريا</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #2E7D32;
+            --bg: #f8f9fa;
+            --text: #2c3e50;
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 0; 
+            color: var(--text); 
+        }
+        
+        /* Top Navigation Bar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            background: var(--card-bg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .lang-switch select {
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 1px solid #e0e0e0;
+            font-weight: bold;
+            color: var(--text);
+            background: var(--bg);
+            cursor: pointer;
+            outline: none;
+            transition: border 0.3s;
+            font-family: inherit;
+        }
+        .lang-switch select:hover { border-color: var(--primary); }
+
+        /* Spacious Hero Section */
+        .hero { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            padding: 100px 20px; 
+            text-align: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        .level-badge { 
+            font-size: 1.4rem; 
+            font-weight: 600; 
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 12px 35px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        .quote { 
+            font-style: italic; 
+            font-size: 1.5rem; 
+            max-width: 800px;
+            line-height: 1.6;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Subjects Grid layout */
+        .container { 
+            max-width: 1200px; 
+            margin: 60px auto; 
+            padding: 0 20px; 
+        }
+        .section-title {
+            margin-bottom: 40px; 
+            color: var(--primary-dark);
+            text-align: center;
+            font-size: 2rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+        .card { 
+            background: var(--card-bg); 
+            padding: 30px 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            text-align: center; 
+            text-decoration: none; 
+            color: var(--text);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.15); 
+        }
+        .card-icon { 
+            font-size: 3.5rem; 
+            margin-bottom: 15px; 
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .card:hover .card-icon { transform: scale(1.1); }
+        .card-title { font-size: 1.3rem; color: var(--primary-dark); margin-bottom: 10px; font-weight: bold; }
+        .card-desc { font-size: 0.95rem; color: #666; line-height: 1.5; margin: 0; }
+
+        @media (max-width: 768px) {
+            .top-nav { flex-direction: column; gap: 15px; padding: 15px; }
+            .hero { padding: 40px 20px; }
+            .quote { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Clean, separated Top Navigation -->
+        <header class="top-nav">
+        <div class="nav-right" style="display: flex; align-items: center; gap: 30px;">
+            <div class="brand-ar" style="font-size: 1.8rem; font-weight: 900; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 2.2rem;">🎓</span>
+                <span>منصة قمم التعليمية</span>
+            </div>
+            <div class="lang-switch">
+                <select id="ui-lang" class="lang-select" onchange="changeLang(this.value)">
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="nav-left" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
+            <span class="brand-fr" style="font-size: 1.2rem; font-weight: bold; color: #2c3e50; letter-spacing: 0.5px;">Plateforme Éducative LES CRETES</span>
+        </div>
+    </header>
+
+    <!-- Spacious Hero Section -->
+    <div class="hero">
+        <h2 id="welcome-student" style="margin: 0; font-size: 2.2rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3);"></h2>
+        <div class="level-badge" data-i18n="hero_subtitle">مستوى: الأولى باكالوريا علوم تجريبية</div>
+        <p class="quote" id="quote-text" data-i18n="motto" style="font-size: 1.8rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3); margin-top: 20px;">خطاك نحو القمة تبدأ من هنا</p>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title" data-i18n="subjects_title">المواد الدراسية</h2>
+                        <div class="grid">
+            {% for subject in subjects %}
+            <a href="/subject/{{ subject.id }}" class="card">
+                <div class="card-icon">{{ subject.emoji }}</div>
+                <h3 class="card-title" data-i18n="sub_{{ subject.id }}">{{ subject.name }}</h3>
+                <p class="card-desc" data-i18n="desc_{{ subject.id }}">انقر للتحدث مع {{ subject.tutor }}</p>
+            </a>
+            {% endfor %}
+        </div>
+                {% endif %}
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">{{ subject.emoji }}</div>
+                    <h3 class="card-title" data-i18n="sub_{{ subject.id }}">{{ subject.name }}</h3>
+                    <p class="card-desc" data-i18n="desc_{{ subject.id }}">انقر للتحدث مع {{ subject.tutor }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            "ar": {
+                "title": "منصة قمم - الأولى باكالوريا",
+                "hero_title": "منصة قمم التعليمية | Plateforme Éducative LES CRETES",
+                "motto": "خطاك نحو القمة تبدأ من هنا",
+                "hero_subtitle": "مستوى: الأولى باكالوريا علوم تجريبية",
+                "quote": "\"النجاح ليس صدفة، بل هو عمل شاق، مثابرة، وتعلّم مستمر.\" 🌟",
+                "subjects_title": "المواد الدراسية",
+                "sub_svt": "علوم الحياة والأرض (SVT)", "desc_svt": "دروس، ملخصات، ودردشة ذكية مع الأستاذ ابن سينا.",
+                "sub_physics": "الفيزياء والكيمياء", "desc_physics": "دروس ومراجعات مع الأستاذ نيوتن.",
+                "sub_math": "الرياضيات", "desc_math": "تمارين وحلول مع الأستاذ الخوارزمي.",
+                "sub_history": "الاجتماعيات", "desc_history": "تاريخ وجغرافيا مع الأستاذ ابن خلدون.",
+                "sub_philosophy": "الفلسفة", "desc_philosophy": "نقاشات فلسفية مع الأستاذ ابن رشد.",
+                "sub_islamic": "التربية الإسلامية", "desc_islamic": "أحكام ودروس مع الأستاذ مالك.",
+                "sub_arabic": "اللغة العربية", "desc_arabic": "قواعد ونصوص مع الأستاذ سيبويه.",
+                "sub_french": "الفرنسية", "desc_french": "تواصل وأدب مع Prof. Molière.",
+                "sub_english": "الإنجليزية", "desc_english": "مهارات اللغة مع Mr. Shakespeare.",
+                "sub_informatique": "المعلوميات", "desc_informatique": "برمجة وتقنيات مع الأستاذ تورينغ."
+            },
+            "fr": {
+                "title": "Plateforme LES CRETES - 1ère Bac",
+                "hero_title": "Plateforme Éducative LES CRETES | منصة قمم التعليمية",
+                "motto": "Votre ascension vers le sommet commence ici",
+                "hero_subtitle": "Niveau: 1ère Bac Sciences Expérimentales",
+                "quote": "\"Le succès n'est pas un accident, c'est du travail acharné et de la persévérance.\" 🌟",
+                "subjects_title": "Matières Scolaires",
+                "sub_svt": "SVT", "desc_svt": "Cours, résumés et chat intelligent avec Prof Ibn Sina.",
+                "sub_physics": "Physique-Chimie", "desc_physics": "Cours et révisions avec Prof Newton.",
+                "sub_math": "Mathématiques", "desc_math": "Exercices et solutions avec Prof Al-Khwarizmi.",
+                "sub_history": "Histoire-Géo", "desc_history": "Histoire et Géographie avec Prof Ibn Khaldoun.",
+                "sub_philosophy": "Philosophie", "desc_philosophy": "Discussions philosophiques avec Prof Averroès.",
+                "sub_islamic": "Éducation Islamique", "desc_islamic": "Règles et leçons avec Prof Malik.",
+                "sub_arabic": "Arabe", "desc_arabic": "Règles et textes avec Prof Sibawayh.",
+                "sub_french": "Français", "desc_french": "Communication et littérature avec Prof Molière.",
+                "sub_english": "Anglais", "desc_english": "Compétences linguistiques avec Mr. Shakespeare.",
+                "sub_informatique": "Informatique", "desc_informatique": "Programmation et techniques avec Prof Turing."
+            },
+            "en": {
+                "title": "LES CRETES Platform - 1st Bac",
+                "hero_title": "LES CRETES Educational Platform | منصة قمم التعليمية",
+                "motto": "Your ascent to the peak starts here",
+                "hero_subtitle": "Level: 1st Bac Experimental Sciences",
+                "quote": "\"Success is no accident. It is hard work, perseverance, and learning.\" 🌟",
+                "subjects_title": "School Subjects",
+                "sub_svt": "Life & Earth Sciences", "desc_svt": "Lessons, summaries, and smart chat with Prof Ibn Sina.",
+                "sub_physics": "Physics & Chemistry", "desc_physics": "Lessons and reviews with Prof Newton.",
+                "sub_math": "Mathematics", "desc_math": "Exercises and solutions with Prof Al-Khwarizmi.",
+                "sub_history": "Social Studies", "desc_history": "History and Geography with Prof Ibn Khaldun.",
+                "sub_philosophy": "Philosophy", "desc_philosophy": "Philosophical discussions with Prof Averroes.",
+                "sub_islamic": "Islamic Education", "desc_islamic": "Rules and lessons with Prof Malik.",
+                "sub_arabic": "Arabic", "desc_arabic": "Grammar and texts with Prof Sibawayh.",
+                "sub_french": "French", "desc_french": "Communication and literature with Prof Molière.",
+                "sub_english": "English", "desc_english": "Language skills with Mr. Shakespeare.",
+                "sub_informatique": "Computer Science", "desc_informatique": "Programming and tech with Prof Turing."
+            }
+        };
+
+        function changeLang(lang) {
+            localStorage.setItem("ui_lang", lang);
+            document.getElementById("html-tag").dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            document.getElementById("ui-lang").value = lang;
+        }
+
+        window.onload = () => {
+            const studentName = localStorage.getItem('student_name');
+            if(!studentName) {
+                window.location.href = '/';
+                return;
+            }
+            const savedLang = localStorage.getItem("ui_lang") || "ar";
+            changeLang(savedLang);
+            
+            // Set welcome text based on language
+            const welcomeEl = document.getElementById("welcome-student");
+            if (savedLang === 'fr') {
+                welcomeEl.textContent = "Bienvenue, " + studentName + " !";
+            } else if (savedLang === 'en') {
+                welcomeEl.textContent = "Welcome, " + studentName + "!";
+            } else {
+                welcomeEl.textContent = "مرحباً بك يا " + studentName + "!";
+            }
+        }
+    </script>
+</body>
+</html>

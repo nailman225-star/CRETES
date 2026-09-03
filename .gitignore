@@ -1,0 +1,20 @@
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment Variables (CRITICAL: Do not upload API keys to GitHub!)
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code/IDE
+.vscode/
+.idea/
