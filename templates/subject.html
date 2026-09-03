@@ -172,6 +172,7 @@
         const tutor_emoji = "{{ tutor_emoji }}";
         
         const studentName = localStorage.getItem('student_name') || 'التلميذ';
+            const studentLevel = localStorage.getItem('student_level') || '';
         
         const translations = {
             "ar": {
@@ -304,7 +305,7 @@
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text, language: langName, subject_id: subject_id, student_name: studentName })
+                    body: JSON.stringify({ message: text, language: langName, subject_id: subject_id, student_name: studentName, student_level: studentLevel })
                 });
 
                 const data = await response.json();

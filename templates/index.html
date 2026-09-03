@@ -287,5 +287,21 @@
             }
         }
     </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const level = localStorage.getItem("student_level") || "";
+                if (level) {
+                    const cards = document.querySelectorAll("a.card");
+                    cards.forEach(card => {
+                        let href = card.getAttribute("href");
+                        if (href && !href.includes("?level=")) {
+                            card.setAttribute("href", href + "?level=" + encodeURIComponent(level));
+                        }
+                    });
+                }
+            });
+        </script>
 </body>
+
 </html>

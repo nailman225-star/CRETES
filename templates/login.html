@@ -139,6 +139,17 @@
                 </div>
             </div>
             
+            
+            <div class="input-group">
+                <label class="form-label text-muted" style="font-size: 14px; margin-bottom: 5px; display: block; font-weight: bold; color: var(--primary-dark);">المستوى الدراسي</label>
+                <select name="student_level" id="student_level" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; outline: none; background: #fff; transition: border-color 0.3s; font-family: inherit;">
+                    <option value="الروض">الروض</option>
+                    <option value="الابتدائي">المستوى الابتدائي</option>
+                    <option value="الإعدادي">المستوى الإعدادي</option>
+                    <option value="الثانوي" selected>المستوى الثانوي</option>
+                </select>
+            </div>
+
             <div class="error-msg" id="error-msg">كلمة السر خاطئة. الرجاء المحاولة مرة أخرى.</div>
             
             <button type="submit" class="login-btn">دخول</button>
@@ -167,8 +178,10 @@
             const name = document.getElementById('student-name').value.trim();
             const pass = document.getElementById('password').value.trim();
             
+            const level = document.getElementById('student_level').value;
             if(pass === '0000') {
                 localStorage.setItem('student_name', name);
+                localStorage.setItem('student_level', level);
                 window.location.href = '/dashboard';
             } else {
                 document.getElementById('error-msg').style.display = 'block';
