@@ -27,16 +27,16 @@ except Exception as e:
     print(f"Warning: Gemini client initialization failed. Please set GEMINI_API_KEY. Error: {e}")
 
 SUBJECTS = {
-    "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "👨‍🏫"},
-    "math": {"name": "الرياضيات", "tutor": "الأستاذ الخوارزمي", "emoji": "👨‍🏫"},
-    "physics": {"name": "الفيزياء والكيمياء", "tutor": "الأستاذ نيوتن", "emoji": "👨‍🔬"},
-    "philosophy": {"name": "الفلسفة", "tutor": "الأستاذ ابن رشد", "emoji": "🧔"},
-    "islamic": {"name": "التربية الإسلامية", "tutor": "الأستاذ مالك", "emoji": "👳‍♂️"},
-    "arabic": {"name": "اللغة العربية", "tutor": "الأستاذ سيبويه", "emoji": "👨‍🏫"},
-    "french": {"name": "الفرنسية", "tutor": "Prof. Molière", "emoji": "👨‍🏫"},
-    "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "👨‍🏫"},
-    "informatique": {"name": "المعلوميات", "tutor": "الأستاذ تورينغ", "emoji": "👨‍💻"},
-    "history": {"name": "الاجتماعيات", "tutor": "الأستاذ ابن خلدون", "emoji": "🌍"}
+    "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "🧬", "tutor_emoji": "👨‍🏫"},
+    "math": {"name": "الرياضيات", "tutor": "الأستاذ الخوارزمي", "emoji": "📐", "tutor_emoji": "👨‍🏫"},
+    "physics": {"name": "الفيزياء والكيمياء", "tutor": "الأستاذ نيوتن", "emoji": "🧲", "tutor_emoji": "👨‍🔬"},
+    "philosophy": {"name": "الفلسفة", "tutor": "الأستاذ ابن رشد", "emoji": "🧠", "tutor_emoji": "🧔"},
+    "islamic": {"name": "التربية الإسلامية", "tutor": "الأستاذ مالك", "emoji": "🕌", "tutor_emoji": "👳‍♂️"},
+    "arabic": {"name": "اللغة العربية", "tutor": "الأستاذ سيبويه", "emoji": "📖", "tutor_emoji": "👨‍🏫"},
+    "french": {"name": "الفرنسية", "tutor": "Prof. Molière", "emoji": "🗼", "tutor_emoji": "👨‍🏫"},
+    "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "🕰️", "tutor_emoji": "👨‍🏫"},
+    "informatique": {"name": "المعلوميات", "tutor": "الأستاذ تورينغ", "emoji": "💻", "tutor_emoji": "👨‍💻"},
+    "history": {"name": "الاجتماعيات", "tutor": "الأستاذ ابن خلدون", "emoji": "🌍", "tutor_emoji": "🧔"}
 }
 
 def get_system_prompt(subject_id, language, student_name="التلميذ"):
@@ -136,7 +136,7 @@ def increment_daily_limit(user_id):
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=15))
 def call_gemini_with_retry(prompt, system_instruction):
     return client.models.generate_content(
-        model='gemini-3.6-flash',
+        model='gemini-2.5-flash',
         contents=prompt,
         config=types.GenerateContentConfig(
             system_instruction=system_instruction,
@@ -150,8 +150,6 @@ def login():
 
 @app.route("/dashboard")
 def index():
-    # Pass subjects to the template to render dynamic cards
-    # Map available png images in DATA to the subjects
     data_dir = os.path.join(os.path.dirname(__file__), 'DATA')
     images = []
     if os.path.exists(data_dir):
@@ -183,7 +181,7 @@ def subject_page(subject_id):
                            subject_id=subject_id, 
                            subject_name=sub["name"], 
                            tutor_name=sub["tutor"], 
-                           tutor_emoji=sub["emoji"])
+                           tutor_emoji=sub["tutor_emoji"])
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
