@@ -19,6 +19,9 @@ client = None
 try:
     api_key = os.environ.get("GEMINI_API_KEY")
     if api_key:
+        if api_key.startswith("AQ"):
+            os.environ["GEMINI_VERTEXAI"] = "True"
+            os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "us-central1")
         client = genai.Client(api_key=api_key)
     else:
         client = genai.Client()
