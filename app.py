@@ -12,9 +12,9 @@ app = Flask(__name__)
 
 user_usage = {}
 DAILY_LIMIT = 30
+client = True  # متغير توافقية لتجنب أخطاء الفحص القديمة
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
-client = True  # Dummy client flag to bypass legacy validation
 
 def generate_gemini_response(prompt_text, system_instruction=''):
     url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}'
@@ -35,38 +35,39 @@ def generate_gemini_response(prompt_text, system_instruction=''):
         return f'حدث خطأ في الاتصال: {str(e)}'
 
 SUBJECTS = {
-    "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "🧬", "tutor_emoji": "👨‍🏫"},
-    "math": {"name": "الرياضيات", "tutor": "الأستاذ عمر الخيام", "emoji": "📐", "tutor_emoji": "👨‍🏫"},
-    "physics": {"name": "الفيزياء والكيمياء", "tutor": "الأستاذ نيوتن", "emoji": "🧲", "tutor_emoji": "👨‍🔬"},
-    "philosophy": {"name": "الفلسفة", "tutor": "الأستاذ ابن رشد", "emoji": "🧠", "tutor_emoji": "🧔"},
-    "islamic": {"name": "التربية الإسلامية", "tutor": "الأستاذ مالك", "emoji": "🕌", "tutor_emoji": "👳‍♂️"},
-    "arabic": {"name": "اللغة العربية", "tutor": "الأستاذ سيبويه", "emoji": "📖", "tutor_emoji": "👨‍🏫"},
-    "french": {"name": "الفرنسية", "tutor": "Prof. Molière", "emoji": "🗼", "tutor_emoji": "👨‍🏫"},
-    "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "", "custom_image": "BigBen.png", "tutor_emoji": "👨‍🏫"},
-    "informatique": {"name": "المعلوميات", "tutor": "الأستاذ الخوارزمي", "emoji": "💻", "tutor_emoji": "👨‍💻"},
-    "history": {"name": "الاجتماعيات", "tutor": "الأستاذ ابن خلدون", "emoji": "🌍", "tutor_emoji": "🧔"}
+    'svt': {'name': 'علوم الحياة والأرض', 'tutor': 'الأستاذ ابن سينا', 'emoji': '🧬', 'tutor_emoji': '👨‍🏫'},
+    'math': {'name': 'الرياضيات', 'tutor': 'الأستاذ عمر الخيام', 'emoji': '📐', 'tutor_emoji': '👨‍🏫'},
+    'physics': {'name': 'الفيزياء والكيمياء', 'tutor': 'الأستاذ نيوتن', 'emoji': '⚗️', 'tutor_emoji': '👨‍🏫'},
+    'philosophy': {'name': 'الفلسفة', 'tutor': 'الأستاذ ابن رشد', 'emoji': '📖', 'tutor_emoji': '👩‍🏫'},
+    'arabic': {'name': 'اللغة العربية', 'tutor': 'الأستاذة عائشة البونية', 'emoji': '✍️', 'tutor_emoji': '👩‍🏫'},
+    'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫'}
 }
 
-def get_system_prompt(subject_id, language, student_name="التلميذ"):
+def get_system_prompt(subject_id, language, student_name="التلميذ", student_level=""):
     subject_info = SUBJECTS.get(subject_id, SUBJECTS["svt"])
     subject_name = subject_info["name"]
     tutor_name = subject_info["tutor"]
+    
+    level_text = f" للمستوى {student_level}" if student_level else ""
 
     prompt = f"""
-أنت {tutor_name}، مدرس متخصص وذكي لمادة {subject_name} موجه لتلاميذ الأولى باكالوريا علوم تجريبية في المغرب.
-الطالب الذي تتحدث معه الآن اسمه '{student_name}'. يرجى مناداته باسمه بين الحين والآخر لجعله يشعر بالاهتمام والترحيب.
+أنت {tutor_name}، مدرس ذكي متخصص في مادة {subject_name}{level_text} تقدم الشروحات 
+والدروس بطريقة تفاعلية ومبسطة للطلاب.
+أنت تتحدث مع طالب اسمه '{student_name}'. استعمل اسمه أحياناً في الشرح ليكون التفاعل شخصياً ومحبباً.
 يجب أن تتحدث باللغة {language}.
     
-إذا طلب التلميذ شرحاً أو صوراً أو أمثلة مرئية، يحق لك تضمين روابط صور حقيقية (مثل صور علمية من ويكيميديا أو مصادر تعليمية) عبر استخدام وسوم HTML مباشرة.
-لا تستخدم الماركداون للصور، بل استخدم فقط وسوم HTML مثل:
+إذا تم سؤالك عن أي موضوع لا علاقة له بمادة تخصصك (أو عن معلومات غير دراسية مثل السياسة أو الرياضة) يجب أن تعتذر بلطف 
+وتخبر الطالب أنك معلم لهذه المادة فقط.
+يمكنك استخدام تنسيق HTML بسيط.
+إذا أردت عرض صورة لتوضيح فكرة ما استخدم كود HTML كالتالي:
 <img src="URL" style="max-width:100%; border-radius:8px; margin-top:10px;" alt="description">
-تأكد من أن الروابط تعمل وصحيحة.
+حيث أن URL هو رابط الصورة.
 
-قواعد صارمة:
-1. التزم بمنهج الأولى باكالوريا علوم تجريبية.
-2. لا تجب عن أسئلة خارج مادة {subject_name} أو خارج الإطار التعليمي.
-3. استخدم أمثلة من الواقع لتسهيل الفهم، وادعم إجاباتك بالتفكير التحليلي.
-4. شجع التلميذ دائماً بعبارات تحفيزية.
+مهمتك الآن:
+1. أجب بأسلوب مشجع ومحفز يناسب سن الطالب{level_text}.
+2. كن دقيقاً في معلومات مادة {subject_name} ومطابقاً للمقرر الدراسي.
+3. اطرح سؤالاً في النهاية لتتأكد من فهم الطالب أو لتحفزه على التفكير.
+4. تجنب الإجابات الطويلة جداً والمملة.
 """
     return prompt
 
@@ -141,21 +142,6 @@ def check_daily_limit(user_id):
 def increment_daily_limit(user_id):
     user_usage[user_id]["count"] += 1
 
-def call_gemini_with_retry(prompt, system_instruction):
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=system_instruction,
-                temperature=0.7
-            )
-        )
-        return response
-    except Exception as e:
-        print(f"Gemini API Error: {e}")
-        raise
-
 @app.route("/")
 def login():
     return render_template("login.html")
@@ -189,30 +175,38 @@ def subject_page(subject_id):
     if subject_id not in SUBJECTS:
         return "المادة غير موجودة", 404
     sub = SUBJECTS[subject_id]
+    
+    # Receive the educational level from query parameter (for dynamic titles)
+    student_level = request.args.get('level', '')
+    
+    title_suffix = f" - {student_level}" if student_level else ""
+
     return render_template("subject.html", 
                            subject_id=subject_id, 
-                           subject_name=sub["name"], 
+                           subject_name=sub["name"] + title_suffix, 
                            tutor_name=sub["tutor"], 
-                           tutor_emoji=sub["tutor_emoji"])
+                           tutor_emoji=sub["tutor_emoji"],
+                           student_level=student_level)
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
     user_id = get_user_identifier()
     
     if not check_daily_limit(user_id):
-        return jsonify({"error": "لقد تجاوزت الحد المسموح به وهو 30 رسالة يومياً. عد غداً!"}), 429
+        return jsonify({"error": "لقد استنفدت الحد اليومي من الرسائل (30). عد غداً!"}), 429
         
     data = request.json
     user_message = data.get("message", "")
     language = data.get("language", "العربية")
     subject_id = data.get("subject_id", "svt")
     student_name = data.get("student_name", "التلميذ")
+    student_level = data.get("student_level", "")
     
     if not user_message:
         return jsonify({"error": "رسالة فارغة"}), 400
         
-    if not client:
-        return jsonify({"error": "مفتاح API غير صالح."}), 500
+    if not client: # legacy fallback if needed
+        pass
         
     try:
         if subject_id == "svt":
@@ -222,7 +216,7 @@ def chat():
             # We don't have RAG for other subjects yet
             prompt = user_message
 
-        sys_prompt = get_system_prompt(subject_id, language, student_name)
+        sys_prompt = get_system_prompt(subject_id, language, student_name, student_level)
         response_text = generate_gemini_response(prompt, sys_prompt)
         
         increment_daily_limit(user_id)
