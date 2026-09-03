@@ -20,14 +20,14 @@ try:
     api_key = os.environ.get("GEMINI_API_KEY")
     if api_key:
         if api_key.startswith("AQ"):
-            os.environ["GEMINI_VERTEXAI"] = "True"
-            os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "us-central1")
-        client = genai.Client(api_key=api_key)
+            client = genai.Client(vertexai=True, api_key=api_key)
+        else:
+            client = genai.Client(api_key=api_key)
     else:
         client = genai.Client()
     print("Gemini client initialized successfully.")
 except Exception as e:
-    print(f"Warning: Gemini client initialization failed. Please set GEMINI_API_KEY. Error: {e}")
+    print(f"Warning: Gemini client initialization failed. Error: {e}")
 
 SUBJECTS = {
     "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "🧬", "tutor_emoji": "👨‍🏫"},
