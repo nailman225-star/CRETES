@@ -28,14 +28,14 @@ except Exception as e:
 
 SUBJECTS = {
     "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "🧬", "tutor_emoji": "👨‍🏫"},
-    "math": {"name": "الرياضيات", "tutor": "الأستاذ الخوارزمي", "emoji": "📐", "tutor_emoji": "👨‍🏫"},
+    "math": {"name": "الرياضيات", "tutor": "الأستاذ عمر الخيام", "emoji": "📐", "tutor_emoji": "👨‍🏫"},
     "physics": {"name": "الفيزياء والكيمياء", "tutor": "الأستاذ نيوتن", "emoji": "🧲", "tutor_emoji": "👨‍🔬"},
     "philosophy": {"name": "الفلسفة", "tutor": "الأستاذ ابن رشد", "emoji": "🧠", "tutor_emoji": "🧔"},
     "islamic": {"name": "التربية الإسلامية", "tutor": "الأستاذ مالك", "emoji": "🕌", "tutor_emoji": "👳‍♂️"},
     "arabic": {"name": "اللغة العربية", "tutor": "الأستاذ سيبويه", "emoji": "📖", "tutor_emoji": "👨‍🏫"},
     "french": {"name": "الفرنسية", "tutor": "Prof. Molière", "emoji": "🗼", "tutor_emoji": "👨‍🏫"},
     "english": {"name": "الإنجليزية", "tutor": "Mr. Shakespeare", "emoji": "", "custom_image": "BigBen.png", "tutor_emoji": "👨‍🏫"},
-    "informatique": {"name": "المعلوميات", "tutor": "الأستاذ تورينغ", "emoji": "💻", "tutor_emoji": "👨‍💻"},
+    "informatique": {"name": "المعلوميات", "tutor": "الأستاذ الخوارزمي", "emoji": "💻", "tutor_emoji": "👨‍💻"},
     "history": {"name": "الاجتماعيات", "tutor": "الأستاذ ابن خلدون", "emoji": "🌍", "tutor_emoji": "🧔"}
 }
 
@@ -136,7 +136,7 @@ def increment_daily_limit(user_id):
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=15))
 def call_gemini_with_retry(prompt, system_instruction):
     return client.models.generate_content(
-        model='gemini-2.5-flash',
+        model='gemini-3.6-flash',
         contents=prompt,
         config=types.GenerateContentConfig(
             system_instruction=system_instruction,
@@ -197,23 +197,20 @@ def chat():
     student_name = data.get("student_name", "التلميذ")
     
     if not user_message:
-        return jsonify({"error": "الرسالة فارغة"}), 400
+        return jsonify({"error": "رسالة فارغة"}), 400
         
     if not client:
         return jsonify({"error": "مفتاح API غير صالح."}), 500
         
     try:
-        if subject_id == 'svt':
+        if subject_id == "svt":
             context = retrieve_relevant_context(user_message)
-            if context:
-                prompt = f"إليك بعض المعلومات المستخرجة من الكتاب للإجابة:\n{context}\n\nسؤال التلميذ:\n{user_message}"
-            else:
-                prompt = user_message
+            prompt = f"سؤال الطالب: {user_message}\n\nمعلومات من المقرر الدراسي (استخدمها إذا كانت مفيدة فقط):\n{context}"
         else:
             # We don't have RAG for other subjects yet
             prompt = user_message
 
-        sys_prompt = get_system_prompt(subject_id, language)
+        sys_prompt = get_system_prompt(subject_id, language, student_name)
         response = call_gemini_with_retry(prompt, sys_prompt)
         
         increment_daily_limit(user_id)

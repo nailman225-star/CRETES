@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-tag">
+<html lang="fr" dir="ltr" id="html-tag">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,6 +74,31 @@
         .message a { color: #1976D2; text-decoration: none; word-break: break-word; font-weight: bold; display: inline-block; }
         .message a:hover { text-decoration: underline; }
         .message img { max-width: 100%; border-radius: 8px; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: block; }
+    
+        .subject-robot {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 180px;
+            max-width: 15vw;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+            z-index: 0;
+            transition: transform 0.3s;
+        }
+        .subject-robot:hover {
+            transform: scale(1.05);
+        }
+        html[dir="rtl"] .subject-robot {
+            right: auto;
+            left: 30px;
+        }
+        @media (max-width: 1300px) {
+            .subject-robot {
+                display: none;
+            }
+        }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -104,7 +129,9 @@
             <a href="/dashboard" class="back-btn" id="sb-back">🏠 العودة للرئيسية</a>
         </div>
 
-        <div class="main-content">
+        <div class="main-content" style="position: relative;">
+            <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="subject-robot">
+
         <div class="chat-container">
             <div class="header">
                 <div class="header-title">
@@ -213,7 +240,7 @@
                 window.location.href = '/';
                 return;
             }
-            const savedLang = localStorage.getItem("ui_lang") || "ar";
+            const savedLang = localStorage.getItem("ui_lang") || "fr";
             changeLang(savedLang);
         }
 

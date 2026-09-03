@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-tag">
+<html lang="fr" dir="ltr" id="html-tag">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,9 +113,34 @@
             .hero { padding: 40px 20px; }
             .quote { font-size: 1.2rem; }
         }
+    
+        .dashboard-robot {
+            position: absolute;
+            top: 55%;
+            transform: translateY(-50%);
+            right: 3%;
+            width: 250px;
+            max-width: 20vw;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+            z-index: -1;
+            opacity: 0.9;
+            transition: transform 0.3s;
+        }
+        .dashboard-robot:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 1200px) {
+            .dashboard-robot {
+                display: none; /* Hide on smaller screens so it doesn't overlap the grid */
+            }
+        }
+
     </style>
 </head>
 <body>
+    <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="dashboard-robot">
+
     <!-- Spacious Hero Section -->
             <!-- Hero Section -->
     <div class="hero" style="position: relative; min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #2E7D32, #4CAF50); padding: 20px; overflow: hidden;">
@@ -125,10 +150,7 @@
             <span style="font-size: 1.8rem; font-weight: 900; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); letter-spacing: 0.5px;">Plateforme Éducative LES CRETES</span>
         </div>
         
-        <!-- TOP RIGHT: Arabic Title -->
-        <div style="position: absolute; top: 25px; right: 30px; z-index: 10;">
-            <span style="font-size: 2rem; font-weight: 900; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">منصة قمم التعليمية</span>
-        </div>
+        
 
         <!-- CENTER: Welcome -->
         <h2 id="welcome-student" style="margin: 30px 0 15px 0; font-size: 1.5rem; font-weight: normal; color: rgba(255,255,255,0.95); text-shadow: 0 1px 3px rgba(0,0,0,0.2); z-index: 10;"></h2>
@@ -186,14 +208,14 @@
                 "subjects_title": "المواد الدراسية",
                 "sub_svt": "علوم الحياة والأرض (SVT)", "desc_svt": "دروس، ملخصات، ودردشة ذكية مع الأستاذ ابن سينا.",
                 "sub_physics": "الفيزياء والكيمياء", "desc_physics": "دروس ومراجعات مع الأستاذ نيوتن.",
-                "sub_math": "الرياضيات", "desc_math": "تمارين وحلول مع الأستاذ الخوارزمي.",
+                "sub_math": "الرياضيات", "desc_math": "تمارين وحلول مع الأستاذ عمر الخيام.",
                 "sub_history": "الاجتماعيات", "desc_history": "تاريخ وجغرافيا مع الأستاذ ابن خلدون.",
                 "sub_philosophy": "الفلسفة", "desc_philosophy": "نقاشات فلسفية مع الأستاذ ابن رشد.",
                 "sub_islamic": "التربية الإسلامية", "desc_islamic": "أحكام ودروس مع الأستاذ مالك.",
                 "sub_arabic": "اللغة العربية", "desc_arabic": "قواعد ونصوص مع الأستاذ سيبويه.",
                 "sub_french": "الفرنسية", "desc_french": "تواصل وأدب مع Prof. Molière.",
                 "sub_english": "الإنجليزية", "desc_english": "مهارات اللغة مع Mr. Shakespeare.",
-                "sub_informatique": "المعلوميات", "desc_informatique": "برمجة وتقنيات مع الأستاذ تورينغ."
+                "sub_informatique": "المعلوميات", "desc_informatique": "برمجة وتقنيات مع الأستاذ الخوارزمي."
             },
             "fr": {
                 "title": "Plateforme LES CRETES - 1ère Bac",
@@ -204,14 +226,14 @@
                 "subjects_title": "Matières Scolaires",
                 "sub_svt": "SVT", "desc_svt": "Cours, résumés et chat intelligent avec Prof Ibn Sina.",
                 "sub_physics": "Physique-Chimie", "desc_physics": "Cours et révisions avec Prof Newton.",
-                "sub_math": "Mathématiques", "desc_math": "Exercices et solutions avec Prof Al-Khwarizmi.",
+                "sub_math": "Mathématiques", "desc_math": "Exercices et solutions avec Prof Omar Khayyam.",
                 "sub_history": "Histoire-Géo", "desc_history": "Histoire et Géographie avec Prof Ibn Khaldoun.",
                 "sub_philosophy": "Philosophie", "desc_philosophy": "Discussions philosophiques avec Prof Averroès.",
                 "sub_islamic": "Éducation Islamique", "desc_islamic": "Règles et leçons avec Prof Malik.",
                 "sub_arabic": "Arabe", "desc_arabic": "Règles et textes avec Prof Sibawayh.",
                 "sub_french": "Français", "desc_french": "Communication et littérature avec Prof Molière.",
                 "sub_english": "Anglais", "desc_english": "Compétences linguistiques avec Mr. Shakespeare.",
-                "sub_informatique": "Informatique", "desc_informatique": "Programmation et techniques avec Prof Turing."
+                "sub_informatique": "Informatique", "desc_informatique": "Programmation et techniques avec Prof Al-Khwarizmi."
             },
             "en": {
                 "title": "LES CRETES Platform - 1st Bac",
@@ -222,14 +244,14 @@
                 "subjects_title": "School Subjects",
                 "sub_svt": "Life & Earth Sciences", "desc_svt": "Lessons, summaries, and smart chat with Prof Ibn Sina.",
                 "sub_physics": "Physics & Chemistry", "desc_physics": "Lessons and reviews with Prof Newton.",
-                "sub_math": "Mathematics", "desc_math": "Exercises and solutions with Prof Al-Khwarizmi.",
+                "sub_math": "Mathematics", "desc_math": "Exercises and solutions with Prof Omar Khayyam.",
                 "sub_history": "Social Studies", "desc_history": "History and Geography with Prof Ibn Khaldun.",
                 "sub_philosophy": "Philosophy", "desc_philosophy": "Philosophical discussions with Prof Averroes.",
                 "sub_islamic": "Islamic Education", "desc_islamic": "Rules and lessons with Prof Malik.",
                 "sub_arabic": "Arabic", "desc_arabic": "Grammar and texts with Prof Sibawayh.",
                 "sub_french": "French", "desc_french": "Communication and literature with Prof Molière.",
                 "sub_english": "English", "desc_english": "Language skills with Mr. Shakespeare.",
-                "sub_informatique": "Computer Science", "desc_informatique": "Programming and tech with Prof Turing."
+                "sub_informatique": "Computer Science", "desc_informatique": "Programming and tech with Prof Al-Khwarizmi."
             }
         };
 
@@ -251,7 +273,7 @@
                 window.location.href = '/';
                 return;
             }
-            const savedLang = localStorage.getItem("ui_lang") || "ar";
+            const savedLang = localStorage.getItem("ui_lang") || "fr";
             changeLang(savedLang);
             
             // Set welcome text based on language
