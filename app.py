@@ -14,6 +14,7 @@ user_usage = {}
 DAILY_LIMIT = 30
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
+client = True  # Dummy client flag to bypass legacy validation
 
 def generate_gemini_response(prompt_text, system_instruction=''):
     url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}'
