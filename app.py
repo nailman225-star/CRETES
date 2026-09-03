@@ -1,13 +1,11 @@
 import os
 from datetime import date
 from flask import Flask, render_template, request, jsonify, send_from_directory
-from google import genai
-from google.genai import types
-from dotenv import load_dotenv
+import requests
 import pypdf
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from tenacity import retry, stop_after_attempt, wait_exponential
+from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
@@ -15,19 +13,25 @@ app = Flask(__name__)
 user_usage = {}
 DAILY_LIMIT = 30
 
-client = None
-try:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if api_key:
-        if api_key.startswith("AQ"):
-            client = genai.Client(vertexai=True, api_key=api_key)
+API_KEY = os.environ.get("GEMINI_API_KEY")
+
+def generate_gemini_response(prompt_text, system_instruction=''):
+    url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}'
+    headers = {'Content-Type': 'application/json'}
+    payload = {
+        'contents': [{'parts': [{'text': prompt_text}]}]
+    }
+    if system_instruction:
+        payload['systemInstruction'] = {'parts': [{'text': system_instruction}]}
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        if response.status_code == 200:
+            res_json = response.json()
+            return res_json['candidates'][0]['content']['parts'][0]['text']
         else:
-            client = genai.Client(api_key=api_key)
-    else:
-        client = genai.Client()
-    print("Gemini client initialized successfully.")
-except Exception as e:
-    print(f"Warning: Gemini client initialization failed. Error: {e}")
+            return f'خطأ من الخادم ({response.status_code}): {response.text}'
+    except Exception as e:
+        return f'حدث خطأ في الاتصال: {str(e)}'
 
 SUBJECTS = {
     "svt": {"name": "علوم الحياة والأرض", "tutor": "الأستاذ ابن سينا", "emoji": "🧬", "tutor_emoji": "👨‍🏫"},
@@ -218,12 +222,12 @@ def chat():
             prompt = user_message
 
         sys_prompt = get_system_prompt(subject_id, language, student_name)
-        response = call_gemini_with_retry(prompt, sys_prompt)
+        response_text = generate_gemini_response(prompt, sys_prompt)
         
         increment_daily_limit(user_id)
         
         return jsonify({
-            "response": response.text,
+            "response": response_text,
             "remaining": DAILY_LIMIT - user_usage[user_id]["count"]
         })
         
