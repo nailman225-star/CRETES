@@ -1,284 +1,179 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr" id="html-tag">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ subject_name }} - منصة قمم</title>
-    <style>        :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #388E3C;
-            --bg-color: #f0f2f5;
-            --text-color: #333;
-            --chat-bg: #ffffff;
-            --user-msg-bg: #e8f5e9;
-            --bot-msg-bg: #f1f3f4;
-            --border-color: #e0e0e0;
-            --chat-font-size: 1.2rem;
+    <title>{{ subject_name }} - Plateforme LES CRETES</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #2E7D32;
+            --bg: #f8f9fa;
+            --text: #2c3e50;
+            --card-bg: #ffffff;
+            --bot-msg: #e8f5e9;
+            --user-msg: #ffffff;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; height: 100vh; color: var(--text); }
         
-        .layout-container { display: flex; flex-grow: 1; overflow: hidden; }
+        .sidebar { width: 300px; background: white; border-right: 1px solid #ddd; padding: 20px; overflow-y: auto; box-shadow: 2px 0 10px rgba(0,0,0,0.05); }
+        .sidebar h2 { color: var(--primary-dark); font-size: 1.5rem; margin-top: 0; }
+        .sidebar-section { margin-top: 30px; }
+        .sidebar-section h3 { font-size: 1.1rem; color: #555; border-bottom: 2px solid var(--primary); padding-bottom: 5px; margin-bottom: 15px; }
+        .sidebar-section ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-section li { margin-bottom: 10px; }
+        .sidebar-section a { text-decoration: none; color: var(--text); display: block; padding: 10px; border-radius: 8px; transition: background 0.3s; }
+        .sidebar-section a:hover { background: #f0f2f5; color: var(--primary-dark); font-weight: bold; }
+        .back-btn { display: block; text-align: center; background: var(--primary); color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 20px; transition: background 0.3s; }
+        .back-btn:hover { background: var(--primary-dark); }
         
-        .sidebar { width: 300px; background: linear-gradient(135deg, #2E7D32, #4CAF50); color: white; padding: 20px; display: flex; flex-direction: column; gap: 20px; box-shadow: 2px 0 10px rgba(0,0,0,0.1); overflow-y: auto;}
-        html[dir="ltr"] .sidebar { box-shadow: -2px 0 10px rgba(0,0,0,0.1); }
-        .sidebar h2 { margin: 0; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; text-align: center; }
-        .sidebar-section { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; }
-        .sidebar-section h3 { margin-top: 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px; }
-        .sidebar-list { list-style: none; padding: 0; margin: 0; }
-        .sidebar-list li { margin-bottom: 10px; }
-        .sidebar-list a { color: #fff; text-decoration: none; display: block; padding: 8px; background: rgba(0,0,0,0.15); border-radius: 5px; transition: background 0.3s; }
-        .sidebar-list a:hover { background: rgba(0,0,0,0.3); }
-        .back-btn { background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 10px; border-radius: 20px; text-align: center; font-weight: bold; display: block; margin-top: auto; transition: background 0.3s; }
-        .back-btn:hover { background: rgba(255,255,255,0.3); }
+        .main-chat { flex-grow: 1; display: flex; flex-direction: column; position: relative; }
+        .chat-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 10; }
+        .chat-header h1 { margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
         
-                .main-content { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; background-color: #f4f6f9; }
-                .chat-container { width: 100%; max-width: 900px; height: 90vh; background-color: var(--chat-bg); border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; overflow: hidden; }
-        .header { background-color: var(--primary-color); color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .header-title { font-size: 1.5em; font-weight: bold; display: flex; align-items: center; gap: 12px; margin: 0; }
-        .icon-badge { background-color: white; color: var(--primary-dark); border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .header-controls { display: flex; align-items: center; gap: 15px; }
-        .lang-select { padding: 5px 10px; border-radius: 20px; border: none; outline: none; font-family: inherit; background-color: rgba(255, 255, 255, 0.2); color: white; font-weight: bold; cursor: pointer; }
-        .lang-select option { color: black; }
-        .zoom-btn { background: rgba(255,255,255,0.2); color: white; border: none; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: background 0.3s; }
+        .chat-controls { display: flex; gap: 10px; align-items: center; }
+        .zoom-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 5px; cursor: pointer; padding: 5px 10px; font-weight: bold; transition: background 0.3s; }
         .zoom-btn:hover { background: rgba(255,255,255,0.4); }
-        .status-bar { font-size: 0.85em; color: #eeeeee; }
-        .messages-container { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .message-wrapper { display: flex; align-items: flex-end; gap: 10px; max-width: 85%; }
         
-        html[dir="rtl"] .message-wrapper.user { align-self: flex-start; flex-direction: row; }
-        html[dir="rtl"] .message-wrapper.bot { align-self: flex-end; flex-direction: row-reverse; }
+        /* Language Dropdown in Header */
+        .lang-select { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); padding: 5px 10px; border-radius: 5px; font-weight: bold; outline: none; cursor: pointer; }
+        .lang-select option { color: black; }
         
-        html[dir="ltr"] .message-wrapper.user { align-self: flex-end; flex-direction: row-reverse; }
-        html[dir="ltr"] .message-wrapper.bot { align-self: flex-start; flex-direction: row; }
+        .status-bar { font-size: 0.9rem; font-weight: bold; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 15px; }
+
+        .chat-container { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; font-size: 1rem; position: relative; }
+        .message-row { display: flex; gap: 15px; max-width: 85%; }
+        .message-row.user { align-self: flex-end; flex-direction: row-reverse; }
+        .message-row.bot { align-self: flex-start; }
+        .avatar { font-size: 2rem; width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; }
         
-        .message { padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: var(--chat-font-size); }
+        .message { padding: 15px 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.6; }
+        .message-row.user .message { background: var(--user-msg); border-bottom-right-radius: 5px; }
+        .message-row.bot .message { background: var(--bot-msg); border-bottom-left-radius: 5px; border: 1px solid rgba(76, 175, 80, 0.2); }
         
-        html[dir="rtl"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-right-radius: 0; }
-        html[dir="rtl"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-left-radius: 0; }
+        .message img { max-width: 100%; border-radius: 10px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        html[dir="ltr"] .message-wrapper.user .message { background-color: var(--user-msg-bg); border-bottom-left-radius: 0; }
-        html[dir="ltr"] .message-wrapper.bot .message { background-color: var(--bot-msg-bg); border-bottom-right-radius: 0; }
+        .input-area { padding: 20px 30px; background: white; border-top: 1px solid #ddd; display: flex; gap: 15px; align-items: center; }
+        .input-area input { flex-grow: 1; padding: 15px 20px; border: 2px solid #e0e0e0; border-radius: 30px; font-size: 1.1rem; outline: none; transition: border-color 0.3s; }
+        .input-area input:focus { border-color: var(--primary); }
+        .input-area button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+        .input-area button:hover { background: var(--primary-dark); }
+        .input-area button:active { transform: scale(0.95); }
         
-        .msg-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); font-size: var(--chat-font-size); flex-shrink: 0; }
-        .message-wrapper.user .msg-icon { background-color: #cfd8dc; }
-        .message-wrapper.bot .msg-icon { background-color: var(--primary-color); color: white; }
-        .input-area { padding: 15px; background-color: #fafafa; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .input-area input { flex-grow: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: 25px; outline: none; font-size: var(--chat-font-size); transition: border-color 0.3s; }
-        .input-area input:focus { border-color: var(--primary-color); }
-        .input-area button { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; font-size: var(--chat-font-size); font-weight: bold; transition: background-color 0.3s; }
-        .input-area button:hover { background-color: var(--primary-dark); }
-        .input-area button:disabled { background-color: #cccccc; cursor: not-allowed; }
-        .loading { align-self: flex-end; color: #888; font-style: italic; display: none; margin: 0 40px; }
+        .loading { display: none; align-self: flex-start; margin-left: 65px; color: #666; font-style: italic; font-size: 0.95rem; }
         
-        /* Markdown Styles */
-        .message a { color: #1976D2; text-decoration: none; word-break: break-word; font-weight: bold; display: inline-block; }
-        .message a:hover { text-decoration: underline; }
-        .message img { max-width: 100%; border-radius: 8px; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: block; }
-    
-        .subject-robot {
+        /* Robot overlay */
+        .chat-robot {
             position: absolute;
-            bottom: 30px;
-            right: 30px;
-            width: 180px;
-            max-width: 15vw;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            opacity: 0.7;
+            pointer-events: none;
             z-index: 0;
-            transition: transform 0.3s;
-        }
-        .subject-robot:hover {
-            transform: scale(1.05);
-        }
-        html[dir="rtl"] .subject-robot {
-            right: auto;
-            left: 30px;
-        }
-        @media (max-width: 1300px) {
-            .subject-robot {
-                display: none;
-            }
         }
 
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { display: none; } /* Hide sidebar on mobile */
+            .message-row { max-width: 95%; }
+            .chat-robot { display: none; }
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <!-- Platform Header -->
+    <div class="sidebar">
+        <h2>{{ subject_name }}</h2>
+        <div class="sidebar-section">
+            <h3>📚 Cours et Leçons</h3>
+            <ul>
+                <li><a href="#">Unité 1 : Introduction</a></li>
+                <li><a href="#">Unité 2 : Concepts Clés</a></li>
+                <li><a href="#">Unité 3 : Approfondissement</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <h3>📝 Exercices et Examens</h3>
+            <ul>
+                <li><a href="#">Exercices Pratiques</a></li>
+                <li><a href="#">Contrôles</a></li>
+            </ul>
+        </div>
+        <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
+    </div>
     
-
-    <div class="layout-container">
-        <div class="sidebar">
-            <h2 id="sb-title">{{ subject_name }}</h2>
-            <div class="sidebar-section">
-                <h3 id="sb-lessons">📚 المقررات والدروس</h3>
-                <ul class="sidebar-list">
-                    <li><a href="#" id="sb-link1">الوحدة الأولى</a></li>
-                    <li><a href="#" id="sb-link2">الوحدة الثانية</a></li>
-                    <li><a href="#" id="sb-link3">الوحدة الثالثة</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3 id="sb-exams">📝 التمارين والامتحانات</h3>
-                <ul class="sidebar-list">
-                    <li><a href="#" id="sb-link4">تمارين تطبيقية</a></li>
-                    <li><a href="#" id="sb-link5">فروض محروسة</a></li>
-                </ul>
-            </div>
-            
-            <a href="/dashboard" class="back-btn" id="sb-back">🏠 العودة للرئيسية</a>
-        </div>
-
-        <div class="main-content" style="position: relative;">
-            <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="subject-robot">
-
-        <div class="chat-container">
-            <div class="header">
-                <div class="header-title">
-                    <div class="icon-badge">{{ tutor_emoji }}</div>
-                    <span id="chat-title">{{ tutor_name }} - {{ subject_name }}</span>
-                </div>
-                <div class="header-controls">
-                    <button onclick="zoomChat(0.1)" class="zoom-btn" title="تكبير الخط">A+</button>
-                    <button onclick="zoomChat(-0.1)" class="zoom-btn" title="تصغير الخط">A-</button>
-                    <select id="ui-lang" class="lang-select" onchange="changeLang(this.value)">
-                        <option value="ar">العربية</option>
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
-                    </select>
-                    <span class="status-bar" id="remaining-count">الرسائل المتبقية: 30</span>
-                </div>
-            </div>
-            
-            <div class="messages-container" id="messages">
-                <div class="message-wrapper bot">
-                    <div class="msg-icon">{{ tutor_emoji }}</div>
-                    <div class="message" id="welcome-msg">مرحباً بك! أنا {{ tutor_name }}، مدرسك الذكي. كيف يمكنني مساعدتك اليوم؟</div>
-                </div>
-                <div class="loading" id="loading-indicator">جارِ الكتابة...</div>
-            </div>
-
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." onkeypress="handleKeyPress(event)">
-                <button id="send-btn" onclick="sendMessage()">إرسال</button>
+    <div class="main-chat">
+        <div class="chat-header">
+            <h1><span>{{ tutor_emoji }}</span> {{ tutor_name }}</h1>
+            <div class="chat-controls">
+                <button onclick="zoomChat(0.1)" class="zoom-btn" title="Zoom In">A+</button>
+                <button onclick="zoomChat(-0.1)" class="zoom-btn" title="Zoom Out">A-</button>
+                <select id="chat-lang" class="lang-select">
+                    <option value="fr">Français</option>
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+                <span class="status-bar" id="remaining-count">Restant : 30</span>
             </div>
         </div>
+        
+        <div class="chat-container" id="chat-box">
+            <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="chat-robot">
+            
+            <div class="message-row bot">
+                <div class="avatar">{{ tutor_emoji }}</div>
+                <div class="message" id="welcome-msg"></div>
+            </div>
+        </div>
+        
+        <div class="loading" id="loading-indicator">En train d'écrire...</div>
+        
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Écrivez votre question ici..." onkeypress="handleKeyPress(event)">
+            <button id="send-btn" onclick="sendMessage()">Envoyer</button>
         </div>
     </div>
 
     <script>
-        const subject_id = "{{ subject_id }}";
-        const tutor_name = "{{ tutor_name }}";
-        const tutor_emoji = "{{ tutor_emoji }}";
-        
-        const studentName = localStorage.getItem('student_name') || 'التلميذ';
-            const studentLevel = localStorage.getItem('student_level') || '';
-        
-        const translations = {
-            "ar": {
-                "sb_lessons": "📚 المقررات والدروس", "sb_exams": "📝 التمارين والامتحانات",
-                "sb_link1": "الوحدة الأولى", "sb_link2": "الوحدة الثانية", "sb_link3": "الوحدة الثالثة",
-                "sb_link4": "تمارين تطبيقية", "sb_link5": "فروض محروسة", "sb_back": "🏠 العودة للرئيسية",
-                "placeholder": "اكتب سؤالك هنا...", "send": "إرسال", "loading": "جارِ الكتابة...",
-                "welcome": `مرحباً بك يا ${studentName}! أنا ${tutor_name}، مدرسك الذكي. كيف يمكنني مساعدتك اليوم؟`,
-                "rem": "الرسائل:", "motto": "خطاك نحو القمة تبدأ من هنا"
-            },
-            "fr": {
-                "sb_lessons": "📚 Cours et Leçons", "sb_exams": "📝 Exercices et Examens",
-                "sb_link1": "Unité 1", "sb_link2": "Unité 2", "sb_link3": "Unité 3",
-                "sb_link4": "Exercices Pratiques", "sb_link5": "Contrôles", "sb_back": "🏠 Retour à l'accueil",
-                "placeholder": "Écrivez votre question ici...", "send": "Envoyer", "loading": "En train d'écrire...",
-                "welcome": `Bonjour ${studentName}! Je suis ${tutor_name}, votre professeur intelligent. Comment puis-je vous aider aujourd'hui?`,
-                "rem": "Messages:", "motto": "Votre ascension vers le sommet commence ici"
-            },
-            "en": {
-                "sb_lessons": "📚 Courses and Lessons", "sb_exams": "📝 Exercises and Exams",
-                "sb_link1": "Unit 1", "sb_link2": "Unit 2", "sb_link3": "Unit 3",
-                "sb_link4": "Practical Exercises", "sb_link5": "Quizzes", "sb_back": "🏠 Back to Home",
-                "placeholder": "Type your question here...", "send": "Send", "loading": "Typing...",
-                "welcome": `Hello ${studentName}! I am ${tutor_name}, your smart tutor. How can I help you today?`,
-                "rem": "Messages:", "motto": "Your ascent to the peak starts here"
-            }
-        };
+        const tutor_emoji = '{{ tutor_emoji }}';
+        const tutor_name = '{{ tutor_name }}';
+        let currentZoom = 1;
+        const studentName = localStorage.getItem('student_name') || 'Élève';
+        const studentLevel = localStorage.getItem('student_level') || '';
 
-        let currentZoom = 1.2;
+        document.getElementById('welcome-msg').innerText = `Bienvenue, ${studentName} ! Je suis ${tutor_name}, votre professeur. Comment puis-je vous aider aujourd'hui ?`;
+
         function zoomChat(step) {
             currentZoom += step;
-            if (currentZoom < 0.8) currentZoom = 0.8;
-            if (currentZoom > 3.0) currentZoom = 3.0;
-            document.documentElement.style.setProperty('--chat-font-size', currentZoom + 'rem');
+            if(currentZoom < 0.8) currentZoom = 0.8;
+            if(currentZoom > 1.5) currentZoom = 1.5;
+            document.getElementById('chat-box').style.fontSize = currentZoom + 'rem';
         }
-
-        function changeLang(lang) {
-            localStorage.setItem("ui_lang", lang);
-            document.getElementById("html-tag").dir = lang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById("ui-lang").value = lang;
-            
-            document.getElementById("sb-lessons").textContent = translations[lang]["sb_lessons"];
-            document.getElementById("sb-exams").textContent = translations[lang]["sb_exams"];
-            document.getElementById("sb-link1").textContent = translations[lang]["sb_link1"];
-            document.getElementById("sb-link2").textContent = translations[lang]["sb_link2"];
-            document.getElementById("sb-link3").textContent = translations[lang]["sb_link3"];
-            document.getElementById("sb-link4").textContent = translations[lang]["sb_link4"];
-            document.getElementById("sb-link5").textContent = translations[lang]["sb_link5"];
-            document.getElementById("sb-back").textContent = translations[lang]["sb_back"];
-            
-            document.getElementById("user-input").placeholder = translations[lang]["placeholder"];
-            document.getElementById("send-btn").textContent = translations[lang]["send"];
-            document.getElementById("loading-indicator").textContent = translations[lang]["loading"];
-            
-            // Re-render the remaining messages text if not changed by the backend
-            let remText = document.getElementById("remaining-count").textContent;
-            let num = remText.replace(/[^0-9]/g, '') || "30";
-            document.getElementById("remaining-count").textContent = translations[lang]["rem"] + " " + num;
-            
-            // Only update welcome msg if it hasn't been overwritten
-            document.getElementById("welcome-msg").textContent = translations[lang]["welcome"];
-        }
-
-        window.onload = () => {
-            if(!localStorage.getItem('student_name')) {
-                window.location.href = '/';
-                return;
-            }
-            const savedLang = localStorage.getItem("ui_lang") || "fr";
-            changeLang(savedLang);
-        }
-
-        const messagesContainer = document.getElementById('messages');
-        const userInput = document.getElementById('user-input');
-        const sendBtn = document.getElementById('send-btn');
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const remainingCountSpan = document.getElementById('remaining-count');
 
         function appendMessage(sender, text) {
-            const wrapper = document.createElement('div');
-            wrapper.classList.add('message-wrapper', sender);
+            const chatBox = document.getElementById('chat-box');
+            const row = document.createElement('div');
+            row.className = `message-row ${sender}`;
             
             const iconDiv = document.createElement('div');
-            iconDiv.classList.add('msg-icon');
-            iconDiv.innerHTML = sender === 'bot' ? tutor_emoji : '🎓';
+            iconDiv.className = 'avatar';
+            iconDiv.innerHTML = sender === 'bot' ? tutor_emoji : '👤';
             
             const msgDiv = document.createElement('div');
-            msgDiv.classList.add('message');
+            msgDiv.className = 'message';
+            msgDiv.innerHTML = text.replace(/\n/g, '<br>');
             
             if (sender === 'bot') {
-                marked.setOptions({ breaks: true });
-                msgDiv.innerHTML = marked.parse(text);
-                
-                msgDiv.querySelectorAll('a').forEach(a => {
-                    a.setAttribute('target', '_blank');
-                    a.setAttribute('rel', 'noopener noreferrer');
-                });
+                row.appendChild(iconDiv);
+                row.appendChild(msgDiv);
             } else {
-                msgDiv.textContent = text;
+                row.appendChild(msgDiv);
+                row.appendChild(iconDiv);
             }
             
-            wrapper.appendChild(iconDiv);
-            wrapper.appendChild(msgDiv);
-            
-            messagesContainer.insertBefore(wrapper, loadingIndicator);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            chatBox.appendChild(row);
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         function handleKeyPress(event) {
@@ -288,48 +183,45 @@
         }
 
         async function sendMessage() {
-            const text = userInput.value.trim();
+            const inputField = document.getElementById('user-input');
+            const text = inputField.value.trim();
             if (!text) return;
 
             appendMessage('user', text);
-            userInput.value = '';
+            inputField.value = '';
             
-            userInput.disabled = true;
-            sendBtn.disabled = true;
-            loadingIndicator.style.display = 'block';
-            
-            const selectedLang = document.getElementById("ui-lang").value;
+            const selectedLang = document.getElementById('chat-lang').value;
             const langName = selectedLang === 'fr' ? 'Français' : (selectedLang === 'en' ? 'English' : 'العربية');
+
+            document.getElementById('loading-indicator').style.display = 'block';
 
             try {
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text, language: langName, subject_id: subject_id, student_name: studentName, student_level: studentLevel })
+                    body: JSON.stringify({ 
+                        message: text,
+                        language: langName,
+                        subject_id: '{{ subject_id }}',
+                        student_name: studentName,
+                        student_level: studentLevel
+                    })
                 });
 
                 const data = await response.json();
+                document.getElementById('loading-indicator').style.display = 'none';
 
                 if (response.ok) {
                     appendMessage('bot', data.response);
-                    if (data.remaining !== undefined) {
-                        const langPrefix = translations[selectedLang]["rem"];
-                        remainingCountSpan.innerText = `${langPrefix} ${data.remaining}`;
-                    }
+                    document.getElementById('remaining-count').innerText = 'Restant : ' + data.remaining;
                 } else {
-                    appendMessage('bot', `❌ خطأ: ${data.error || 'حدث خطأ'}`);
+                    appendMessage('bot', `⚠️ Erreur : ${data.error || 'Erreur inconnue'}`);
                 }
             } catch (error) {
-                appendMessage('bot', `❌ خطأ في الاتصال: ${error.message}`);
-            } finally {
-                userInput.disabled = false;
-                sendBtn.disabled = false;
-                loadingIndicator.style.display = 'none';
-                userInput.focus();
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                document.getElementById('loading-indicator').style.display = 'none';
+                appendMessage('bot', `⚠️ Erreur de connexion : ${error.message}`);
             }
         }
     </script>
-    </div>
 </body>
 </html>
