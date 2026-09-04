@@ -40,7 +40,7 @@ SUBJECTS = {
     'physics': {'name': 'الفيزياء والكيمياء', 'tutor': 'الأستاذ نيوتن', 'emoji': '⚗️', 'tutor_emoji': '👨‍🏫'},
     'philosophy': {'name': 'الفلسفة', 'tutor': 'الأستاذ ابن رشد', 'emoji': '📖', 'tutor_emoji': '👩‍🏫'},
     'arabic': {'name': 'اللغة العربية', 'tutor': 'الأستاذة عائشة البونية', 'emoji': '✍️', 'tutor_emoji': '👩‍🏫'},
-    'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫'},
+    'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫', 'custom_image': 'BigBen.png'},
     'french': {'name': 'اللغة الفرنسية', 'tutor': 'Prof. Molière', 'emoji': '🗼', 'tutor_emoji': '👨‍🏫'},
     'islamic': {'name': 'التربية الإسلامية', 'tutor': 'الأستاذ مالك', 'emoji': '🕌', 'tutor_emoji': '👨‍🏫'},
     'social': {'name': 'الاجتماعيات', 'tutor': 'الأستاذ ابن خلدون', 'emoji': '🌍', 'tutor_emoji': '👨‍🏫'},
@@ -51,7 +51,7 @@ SUBJECTS = {
     'islamic_basic': {'name': 'التربية الإسلامية المبسطة', 'tutor': 'الأستاذة خديجة', 'emoji': '🌙', 'tutor_emoji': '👩‍🏫'},
     'economics': {'name': 'الاقتصاد والمحاسبة', 'tutor': 'الأستاذ آدم سميث', 'emoji': '📊', 'tutor_emoji': '👨‍🏫'},
     'history_geo': {'name': 'التاريخ والجغرافيا', 'tutor': 'الأستاذ الإدريسي', 'emoji': '🗺️', 'tutor_emoji': '👨‍🏫'},
-    'family_edu': {'name': 'التربية الأسرية', 'tutor': 'الأستاذة زينب', 'emoji': '👨‍👩‍👧‍👦', 'tutor_emoji': '👩‍🏫'},
+    'family_edu': {'name': 'التربية الأسرية', 'tutor': 'الأستاذة عائشة', 'emoji': '👨‍👩‍👧‍👦', 'tutor_emoji': '👩‍🏫'},
     'informatique': {'name': 'المعلوميات', 'tutor': 'الأستاذ الخوارزمي', 'emoji': '💻', 'tutor_emoji': '👨‍🏫'},
     'technology': {'name': 'التكنولوجيا', 'tutor': 'المهندس كريم', 'emoji': '⚙️', 'tutor_emoji': '👨‍🏫'}
 }
