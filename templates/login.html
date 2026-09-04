@@ -213,7 +213,7 @@
             if(pass === '0000') {
                 localStorage.setItem('student_name', name);
                 localStorage.setItem('student_level', level);
-                window.location.href = '/dashboard';
+                window.location.href = '/dashboard?level=' + encodeURIComponent(level);
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }

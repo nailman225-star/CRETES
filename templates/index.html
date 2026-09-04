@@ -172,8 +172,8 @@
         </div>
 
         <!-- BOTTOM RIGHT: Level Badge -->
-        <div data-i18n="hero_subtitle" style="position: absolute; bottom: 25px; right: 30px; background: rgba(0,0,0,0.25); padding: 10px 20px; border-radius: 6px; font-weight: bold; color: white; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.1); z-index: 10;">
-            مستوى: الأولى باكالوريا علوم تجريبية
+        <div style="position: absolute; bottom: 25px; right: 30px; background: rgba(0,0,0,0.25); padding: 10px 20px; border-radius: 6px; font-weight: bold; color: white; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.1); z-index: 10;">
+            مستوى: <span id="display-level">{{ student_level if student_level else "" }}</span>
         </div>
 
     </div>
@@ -203,7 +203,7 @@
                 "title": "منصة قمم - الأولى باكالوريا",
                 "hero_title": "منصة قمم التعليمية | Plateforme Éducative LES CRETES",
                 "motto": "خطاك نحو القمة تبدأ من هنا",
-                "hero_subtitle": "مستوى: الأولى باكالوريا علوم تجريبية",
+                "hero_subtitle": "مستوى: {{ student_level if student_level else "غير محدد" }}",
                 "quote": "\"النجاح ليس صدفة، بل هو عمل شاق، مثابرة، وتعلّم مستمر.\" 🌟",
                 "subjects_title": "المواد الدراسية",
                 "sub_svt": "علوم الحياة والأرض (SVT)", "desc_svt": "دروس، ملخصات، ودردشة ذكية مع الأستاذ ابن سينا.",
@@ -290,7 +290,22 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                const level = localStorage.getItem("student_level") || "";
+                let currentLevel = "{{ student_level }}";
+                let localLevel = localStorage.getItem("student_level") || "";
+                
+                // If url has no level but we have one locally, redirect once
+                if (!currentLevel && localLevel) {
+                    window.location.href = '/dashboard?level=' + encodeURIComponent(localLevel);
+                    return;
+                }
+                
+                // Ensure span is updated
+                if (currentLevel) {
+                    document.getElementById('display-level').innerText = currentLevel;
+                    localStorage.setItem("student_level", currentLevel);
+                }
+                
+                const level = currentLevel || localLevel;
                 if (level) {
                     const cards = document.querySelectorAll("a.card");
                     cards.forEach(card => {

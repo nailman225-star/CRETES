@@ -49,12 +49,44 @@ SUBJECTS = {
     'motor': {'name': 'الأنشطة الحسية الحركية', 'tutor': 'المدرب طارق', 'emoji': '🏃‍♂️', 'tutor_emoji': '👨‍🏫'},
     'art': {'name': 'الأنشطة الفنية', 'tutor': 'الأستاذ بيكاسو', 'emoji': '🎨', 'tutor_emoji': '👨‍🏫'},
     'islamic_basic': {'name': 'التربية الإسلامية المبسطة', 'tutor': 'الأستاذة خديجة', 'emoji': '🌙', 'tutor_emoji': '👩‍🏫'},
-    'economics': {'name': 'الاقتصاد والمحاسبة', 'tutor': 'الأستاذ آدم سميث', 'emoji': '📊', 'tutor_emoji': '👨‍🏫'}
+    'economics': {'name': 'الاقتصاد والمحاسبة', 'tutor': 'الأستاذ آدم سميث', 'emoji': '📊', 'tutor_emoji': '👨‍🏫'},
+    'history_geo': {'name': 'التاريخ والجغرافيا', 'tutor': 'الأستاذ الإدريسي', 'emoji': '🗺️', 'tutor_emoji': '👨‍🏫'}
 }
 
 def get_subjects_for_level(level):
     if not level:
         return list(SUBJECTS.keys())
+        
+    if "الروض" in level:
+        return ['communication', 'motor', 'islamic_basic', 'art']
+        
+    elif "ابتدائي" in level:
+        subs = ['islamic', 'arabic', 'french', 'math', 'science']
+        if any(x in level for x in ["الرابع", "الخامس", "السادس"]):
+            subs.append('social')
+        return subs
+        
+    elif "إعدادي" in level:
+        return ['islamic', 'arabic', 'french', 'english', 'math', 'physics', 'svt', 'social']
+        
+    elif "جذع مشترك" in level:
+        if "علمي" in level:
+            return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'social', 'philosophy', 'islamic']
+        return ['arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'math']
+        
+    elif "1 باك" in level:
+        if "اقتصادية" in level:
+            return ['math', 'economics', 'french', 'english', 'philosophy', 'islamic', 'arabic', 'history_geo']
+        else:
+            return ['math', 'physics', 'svt', 'philosophy', 'arabic', 'french', 'english', 'islamic', 'history_geo']
+            
+    elif "2 باك" in level:
+        if "اقتصاد" in level:
+            return ['economics', 'math', 'philosophy', 'french', 'english', 'islamic']
+        else:
+            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic']
+            
+    return list(SUBJECTS.keys())
     if "الروض" in level:
         return ['communication', 'motor', 'islamic_basic', 'art']
     elif "ابتدائي" in level:
