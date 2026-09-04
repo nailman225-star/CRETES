@@ -40,8 +40,46 @@ SUBJECTS = {
     'physics': {'name': 'الفيزياء والكيمياء', 'tutor': 'الأستاذ نيوتن', 'emoji': '⚗️', 'tutor_emoji': '👨‍🏫'},
     'philosophy': {'name': 'الفلسفة', 'tutor': 'الأستاذ ابن رشد', 'emoji': '📖', 'tutor_emoji': '👩‍🏫'},
     'arabic': {'name': 'اللغة العربية', 'tutor': 'الأستاذة عائشة البونية', 'emoji': '✍️', 'tutor_emoji': '👩‍🏫'},
-    'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫'}
+    'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫'},
+    'french': {'name': 'اللغة الفرنسية', 'tutor': 'Prof. Molière', 'emoji': '🗼', 'tutor_emoji': '👨‍🏫'},
+    'islamic': {'name': 'التربية الإسلامية', 'tutor': 'الأستاذ مالك', 'emoji': '🕌', 'tutor_emoji': '👨‍🏫'},
+    'social': {'name': 'الاجتماعيات', 'tutor': 'الأستاذ ابن خلدون', 'emoji': '🌍', 'tutor_emoji': '👨‍🏫'},
+    'science': {'name': 'النشاط العلمي', 'tutor': 'الأستاذة مريم', 'emoji': '🔬', 'tutor_emoji': '👩‍🏫'},
+    'communication': {'name': 'التعبير اللغوي والتواصل', 'tutor': 'الأستاذة فاطمة', 'emoji': '🗣️', 'tutor_emoji': '👩‍🏫'},
+    'motor': {'name': 'الأنشطة الحسية الحركية', 'tutor': 'المدرب طارق', 'emoji': '🏃‍♂️', 'tutor_emoji': '👨‍🏫'},
+    'art': {'name': 'الأنشطة الفنية', 'tutor': 'الأستاذ بيكاسو', 'emoji': '🎨', 'tutor_emoji': '👨‍🏫'},
+    'islamic_basic': {'name': 'التربية الإسلامية المبسطة', 'tutor': 'الأستاذة خديجة', 'emoji': '🌙', 'tutor_emoji': '👩‍🏫'},
+    'economics': {'name': 'الاقتصاد والمحاسبة', 'tutor': 'الأستاذ آدم سميث', 'emoji': '📊', 'tutor_emoji': '👨‍🏫'}
 }
+
+def get_subjects_for_level(level):
+    if not level:
+        return list(SUBJECTS.keys())
+    if "الروض" in level:
+        return ['communication', 'motor', 'islamic_basic', 'art']
+    elif "ابتدائي" in level:
+        subs = ['islamic', 'arabic', 'french', 'math', 'science']
+        if "الخامس" in level or "السادس" in level or "الرابع" in level:
+            subs.append('social')
+        return subs
+    elif "إعدادي" in level:
+        return ['islamic', 'arabic', 'french', 'english', 'math', 'physics', 'svt', 'social']
+    elif "جذع مشترك" in level:
+        if "علمي" in level or "تكنولوجي" in level:
+            return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'social', 'philosophy', 'islamic']
+        else:
+            return ['arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'math']
+    elif "1 باك" in level:
+        if "اقتصادية" in level:
+            return ['math', 'economics', 'french', 'english', 'philosophy', 'islamic', 'arabic', 'social']
+        else:
+            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic', 'arabic']
+    elif "2 باك" in level:
+        if "اقتصاد" in level:
+            return ['economics', 'math', 'philosophy', 'french', 'english', 'islamic']
+        else:
+            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic']
+    return list(SUBJECTS.keys())
 
 def get_system_prompt(subject_id, language, student_name="التلميذ", student_level=""):
     subject_info = SUBJECTS.get(subject_id, SUBJECTS["svt"])
@@ -148,23 +186,27 @@ def login():
 
 @app.route("/dashboard")
 def index():
+    student_level = request.args.get('level', '')
     data_dir = os.path.join(os.path.dirname(__file__), 'DATA')
     images = []
     if os.path.exists(data_dir):
         images = sorted([f for f in os.listdir(data_dir) if f.endswith('.png') or f.endswith('.jpg') or f.endswith('.jpeg')])
     
     subjects_list = []
-    for i, (sid, info) in enumerate(SUBJECTS.items()):
-        img_name = images[i % len(images)] if images else ""
-        subjects_list.append({
-            "id": sid,
-            "name": info["name"],
-            "tutor": info["tutor"],
-            "emoji": info["emoji"],
-            "custom_image": f"/data/{info['custom_image']}" if "custom_image" in info else ""
-        })
+    allowed_subs = get_subjects_for_level(student_level)
+    
+    for i, sid in enumerate(allowed_subs):
+        if sid in SUBJECTS:
+            info = SUBJECTS[sid]
+            subjects_list.append({
+                "id": sid,
+                "name": info["name"],
+                "tutor": info["tutor"],
+                "emoji": info["emoji"],
+                "custom_image": f"/data/{info['custom_image']}" if "custom_image" in info else ""
+            })
         
-    return render_template("index.html", subjects=subjects_list)
+    return render_template("index.html", subjects=subjects_list, student_level=student_level)
 
 @app.route("/data/<path:filename>")
 def serve_data(filename):
