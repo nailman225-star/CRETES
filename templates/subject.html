@@ -8,7 +8,7 @@
         :root {
             --primary: #4CAF50;
             --primary-dark: #2E7D32;
-            --bg: #f0f2f5;
+            --bg: #f4f6f8;
             --text: #2c3e50;
             --bot-msg: #e8f5e9;
             --user-msg: #f8f9fa;
@@ -16,44 +16,69 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background-color: var(--bg);
-            background-image: linear-gradient(135deg, rgba(76,175,80,0.1) 0%, rgba(46,125,50,0.1) 100%);
             margin: 0; 
             padding: 0; 
             display: flex; 
-            justify-content: center;
-            align-items: center;
             height: 100vh; 
             color: var(--text); 
-        }
-        
-        .app-container {
-            display: flex;
-            width: 95%;
-            max-width: 1200px;
-            height: 90vh;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
-        .sidebar { width: 300px; background: #f8f9fa; border-right: 1px solid #e0e0e0; padding: 25px 20px; overflow-y: auto; display: flex; flex-direction: column; }
-        .sidebar h2 { color: var(--primary-dark); font-size: 1.5rem; margin-top: 0; margin-bottom: 5px; }
-        .sidebar-level { font-size: 0.95rem; font-weight: bold; color: #666; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #e0e0e0; }
+        /* Sidebar - Full height, fixed to edge */
+        .sidebar { 
+            width: 320px; 
+            height: 100vh;
+            background: var(--primary-dark); 
+            color: white;
+            padding: 25px 20px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            flex-shrink: 0;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+            z-index: 20;
+            box-sizing: border-box;
+        }
+        .sidebar h2 { color: white; font-size: 1.6rem; margin-top: 0; margin-bottom: 5px; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .sidebar-level { font-size: 0.95rem; font-weight: bold; color: #c8e6c9; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); }
         
         .sidebar-section { margin-bottom: 25px; }
-        .sidebar-section h3 { font-size: 1.05rem; color: #555; margin-bottom: 15px; }
+        .sidebar-section h3 { font-size: 1.1rem; color: #e8f5e9; margin-bottom: 15px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
         .sidebar-section ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar-section li { margin-bottom: 8px; }
-        .sidebar-section a { text-decoration: none; color: #444; display: block; padding: 10px 15px; border-radius: 10px; transition: all 0.2s; background: white; border: 1px solid #eee; }
-        .sidebar-section a:hover { background: rgba(76,175,80,0.1); border-color: var(--primary); color: var(--primary-dark); font-weight: bold; transform: translateX(5px); }
+        .sidebar-section li { margin-bottom: 10px; }
+        .sidebar-section a { text-decoration: none; color: white; display: block; padding: 12px 15px; border-radius: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); transition: all 0.2s; }
+        .sidebar-section a:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); transform: translateX(5px); }
         
-        .back-btn { margin-top: auto; display: block; text-align: center; background: white; border: 2px solid var(--primary); color: var(--primary-dark); text-decoration: none; padding: 12px; border-radius: 12px; font-weight: bold; transition: all 0.3s; }
-        .back-btn:hover { background: var(--primary); color: white; }
+        .back-btn { margin-top: auto; display: block; text-align: center; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); color: white; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: bold; transition: all 0.3s; }
+        .back-btn:hover { background: white; color: var(--primary-dark); }
         
-        .main-chat { flex-grow: 1; display: flex; flex-direction: column; position: relative; background: white; }
-        .chat-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 10; }
-        .chat-header h1 { margin: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
+        /* Main Chat Area - Expanded to take remaining space */
+        .main-chat-wrapper {
+            flex-grow: 1;
+            padding: 20px; /* Reduced margins to remove huge side spaces */
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            background-image: linear-gradient(135deg, rgba(76,175,80,0.05) 0%, rgba(46,125,50,0.05) 100%);
+        }
+        
+        .main-chat { 
+            width: 100%;
+            max-width: 1400px; /* Allows it to expand nicely */
+            height: 100%;
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            display: flex; 
+            flex-direction: column; 
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .chat-header { background: var(--primary); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 10; border-bottom: 2px solid rgba(0,0,0,0.05); }
+        .chat-header h1 { margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
         
         .chat-controls { display: flex; gap: 10px; align-items: center; }
         .zoom-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 6px; cursor: pointer; padding: 6px 12px; font-weight: bold; transition: background 0.3s; }
@@ -62,64 +87,79 @@
         .lang-select { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); padding: 6px 12px; border-radius: 6px; font-weight: bold; outline: none; cursor: pointer; }
         .lang-select option { color: black; }
         
-        .status-bar { font-size: 0.9rem; font-weight: bold; background: rgba(0,0,0,0.2); padding: 6px 12px; border-radius: 15px; }
+        .status-bar { font-size: 0.95rem; font-weight: bold; background: rgba(0,0,0,0.2); padding: 6px 15px; border-radius: 20px; }
 
-        .chat-container { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; font-size: 1rem; position: relative; background: #ffffff; }
-        .message-row { display: flex; gap: 15px; max-width: 85%; }
+        .chat-container { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; font-size: 1.05rem; background: #ffffff; position: relative; }
+        
+        .message-row { display: flex; gap: 15px; max-width: 85%; z-index: 5; }
         .message-row.user { align-self: flex-end; flex-direction: row-reverse; }
         .message-row.bot { align-self: flex-start; }
         
         .avatar { font-size: 1.8rem; width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; border: 1px solid #eee; }
         
-        .message { padding: 15px 20px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); line-height: 1.5; border: 1px solid #eee; }
-        .message-row.user .message { background: var(--user-msg); border-bottom-right-radius: 4px; }
+        .message { padding: 18px 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); line-height: 1.6; border: 1px solid #eee; }
+        .message-row.user .message { background: var(--user-msg); border-bottom-right-radius: 4px; border-color: #e0e0e0; }
         .message-row.bot .message { background: var(--bot-msg); border-bottom-left-radius: 4px; border-color: rgba(76, 175, 80, 0.2); }
         
         .message img { max-width: 100%; border-radius: 10px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        .input-area { padding: 20px 30px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 15px; align-items: center; }
-        .input-area input { flex-grow: 1; padding: 15px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1rem; outline: none; transition: border-color 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
+        .input-area { padding: 25px 30px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 15px; align-items: center; z-index: 10; }
+        .input-area input { flex-grow: 1; padding: 16px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1.05rem; outline: none; transition: border-color 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
         .input-area input:focus { border-color: var(--primary); }
-        .input-area button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(76,175,80,0.3); }
+        .input-area button { background: var(--primary); color: white; border: none; padding: 16px 35px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(76,175,80,0.3); }
         .input-area button:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(76,175,80,0.4); }
         .input-area button:active { transform: translateY(0); }
         
-        .loading { display: none; align-self: flex-start; margin-left: 65px; color: #888; font-style: italic; font-size: 0.9rem; }
+        .loading { display: none; align-self: flex-start; margin-left: 65px; color: #888; font-style: italic; font-size: 0.95rem; }
         
-        .chat-robot { position: absolute; bottom: 20px; right: 20px; width: 120px; opacity: 0.6; pointer-events: none; z-index: 0; }
+        /* ZID Robot Icon - Restored to large size and placed prominently */
+        .chat-robot { 
+            position: absolute; 
+            bottom: -5px; 
+            right: 0px; 
+            width: 250px; /* Large, prominent size as requested */
+            opacity: 1; /* Fully visible, not faded */
+            pointer-events: none; 
+            z-index: 100; /* Stays on top to look lively */
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+        }
 
         @media (max-width: 900px) {
-            .app-container { width: 100%; height: 100vh; border-radius: 0; }
             .sidebar { display: none; }
+            .main-chat-wrapper { padding: 0; }
+            .main-chat { border-radius: 0; }
             .message-row { max-width: 95%; }
-            .chat-robot { display: none; }
+            .chat-robot { width: 150px; }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="sidebar">
-            <h2>{{ subject_name }}</h2>
-            <div class="sidebar-level" id="sidebar-level">Niveau : ...</div>
-            
-            <div class="sidebar-section">
-                <h3>📚 Cours et Leçons</h3>
-                <ul>
-                    <li><a href="#">Unité 1 : Introduction</a></li>
-                    <li><a href="#">Unité 2 : Concepts Clés</a></li>
-                    <li><a href="#">Unité 3 : Approfondissement</a></li>
-                </ul>
-            </div>
-            <div class="sidebar-section">
-                <h3>📝 Exercices et Examens</h3>
-                <ul>
-                    <li><a href="#">Exercices Pratiques</a></li>
-                    <li><a href="#">Contrôles</a></li>
-                </ul>
-            </div>
-            <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
-        </div>
+    
+    <!-- Sidebar restored to full height and edge of screen -->
+    <div class="sidebar">
+        <h2>{{ subject_name }}</h2>
+        <div class="sidebar-level" id="sidebar-level">Niveau : ...</div>
         
+        <div class="sidebar-section">
+            <h3>📚 Cours et Leçons</h3>
+            <ul>
+                <li><a href="#">Unité 1 : Introduction</a></li>
+                <li><a href="#">Unité 2 : Concepts Clés</a></li>
+                <li><a href="#">Unité 3 : Approfondissement</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <h3>📝 Exercices et Examens</h3>
+            <ul>
+                <li><a href="#">Exercices Pratiques</a></li>
+                <li><a href="#">Contrôles</a></li>
+            </ul>
+        </div>
+        <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
+    </div>
+    
+    <!-- Main Chat Area - Expanded to remove huge margins -->
+    <div class="main-chat-wrapper">
         <div class="main-chat">
             <div class="chat-header">
                 <h1><span>{{ tutor_emoji }}</span> {{ tutor_name }}</h1>
@@ -136,6 +176,7 @@
             </div>
             
             <div class="chat-container" id="chat-box">
+                <!-- ZID Robot Icon restored -->
                 <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="chat-robot">
                 
                 <div class="message-row bot">
