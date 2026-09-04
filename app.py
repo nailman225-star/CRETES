@@ -35,9 +35,9 @@ def generate_gemini_response(prompt_text, system_instruction=''):
         return f'حدث خطأ في الاتصال: {str(e)}'
 
 SUBJECTS = {
-    'svt': {'name': 'علوم الحياة والأرض', 'tutor': 'الأستاذ ابن سينا', 'emoji': '🧬', 'tutor_emoji': '👨‍🏫'},
+    'svt': {'name': 'علوم الحياة والأرض', 'tutor': 'الأستاذ ابن النفيس', 'emoji': '🧬', 'tutor_emoji': '👨‍🏫'},
     'math': {'name': 'الرياضيات', 'tutor': 'الأستاذ عمر الخيام', 'emoji': '📐', 'tutor_emoji': '👨‍🏫'},
-    'physics': {'name': 'الفيزياء والكيمياء', 'tutor': 'الأستاذ نيوتن', 'emoji': '⚗️', 'tutor_emoji': '👨‍🏫'},
+    'physics': {'name': 'الفيزياء والكيمياء', 'tutor': 'الأستاذ ابن الهيثم', 'emoji': '⚗️', 'tutor_emoji': '👨‍🏫'},
     'philosophy': {'name': 'الفلسفة', 'tutor': 'الأستاذ ابن رشد', 'emoji': '📖', 'tutor_emoji': '👩‍🏫'},
     'arabic': {'name': 'اللغة العربية', 'tutor': 'الأستاذة عائشة البونية', 'emoji': '✍️', 'tutor_emoji': '👩‍🏫'},
     'english': {'name': 'اللغة الإنجليزية', 'tutor': 'الأستاذة مايا', 'emoji': '🌐', 'tutor_emoji': '👩‍🏫', 'custom_image': 'BigBen.png'},
@@ -52,9 +52,9 @@ SUBJECTS = {
     'islamic_basic': {'name': 'التربية الإسلامية المبسطة', 'tutor': 'الأستاذة خديجة', 'emoji': '🌙', 'tutor_emoji': '👩‍🏫'},
     'art_primary': {'name': 'التربية الفنية والتشكيلية', 'tutor': 'الأستاذة ليلى', 'emoji': '🎨', 'tutor_emoji': '👩‍🏫'},
     'pe': {'name': 'التربية البدنية', 'tutor': 'الكابتن سعيد', 'emoji': '⚽', 'tutor_emoji': '👨‍🏫'},
-    'family_edu': {'name': 'التربية الأسرية', 'tutor': 'الأستاذة عائشة', 'emoji': '👨‍👩‍👧‍👦', 'tutor_emoji': '👩‍🏫'},
+    'family_edu': {'name': 'التربية الأسرية', 'tutor': 'الأستاذة الشفاء بنت عبد الله', 'emoji': '👨‍👩‍👧‍👦', 'tutor_emoji': '👩‍🏫'},
     'informatique': {'name': 'المعلوميات (الإعلاميات)', 'tutor': 'الأستاذ الخوارزمي', 'emoji': '💻', 'tutor_emoji': '👨‍🏫'},
-    'technology': {'name': 'التكنولوجيا الصناعية', 'tutor': 'المهندس كريم', 'emoji': '⚙️', 'tutor_emoji': '👨‍🏫'},
+    'technology': {'name': 'التكنولوجيا الصناعية', 'tutor': 'الأستاذ الجزري', 'emoji': '⚙️', 'tutor_emoji': '👨‍🏫'},
     'art_music': {'name': 'التربية التشكيلية أو الموسيقية', 'tutor': 'الأستاذ فريد', 'emoji': '🎵', 'tutor_emoji': '👨‍🏫'},
     'history_geo': {'name': 'التاريخ والجغرافيا', 'tutor': 'الأستاذ الإدريسي', 'emoji': '🗺️', 'tutor_emoji': '👨‍🏫'}
 }
