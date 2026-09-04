@@ -1,137 +1,161 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول - منصة قمم التعليمية</title>
+    <title>Connexion - Plateforme Éducative LES CRETES</title>
     <style>
         :root {
             --primary: #4CAF50;
             --primary-dark: #2E7D32;
-            --bg: #f5f7fa;
+            --bg: #f0f2f5;
             --card-bg: #ffffff;
             --text: #333333;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            margin: 0;
-            height: 100vh;
+            background-color: var(--bg);
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            margin: 0;
             color: var(--text);
+            background-image: linear-gradient(135deg, rgba(76,175,80,0.1) 0%, rgba(46,125,50,0.1) 100%);
         }
         .login-card {
             background: var(--card-bg);
-            padding: 50px 40px;
+            padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
         }
         .login-card h1 {
             font-size: 1.8rem;
             color: var(--primary-dark);
-            margin-bottom: 5px;
-        }
-        .login-card h2 {
-            font-size: 1rem;
-            color: #7f8c8d;
-            font-weight: normal;
             margin-bottom: 30px;
+            font-weight: 800;
         }
         .input-group {
             margin-bottom: 20px;
-            text-align: right;
+            text-align: left;
         }
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 600;
             color: #555;
+            font-size: 0.95rem;
         }
-        .input-group input {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.3s;
         }
-        .input-group input:focus {
+        .input-group input:focus, .input-group select:focus {
             border-color: var(--primary);
         }
+        
         .password-wrapper {
             position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .password-wrapper input {
-            padding-left: 45px;
         }
         .toggle-password {
             position: absolute;
-            left: 12px;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
-            color: #7f8c8d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: color 0.3s;
+            color: #777;
         }
-        .toggle-password:hover {
-            color: var(--primary);
-        }
-        .error-msg {
-            color: #e74c3c;
-            font-size: 0.9rem;
+        
+        .level-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 15px;
-            display: none;
         }
+        .category-btn {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn:hover {
+            background: #e9ecef;
+        }
+        .category-btn.active {
+            background: rgba(76,175,80,0.1);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+        
+        .levels-dropdown {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .login-btn {
+            width: 100%;
+            padding: 14px;
             background: var(--primary);
             color: white;
             border: none;
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
         }
         .login-btn:hover {
             background: var(--primary-dark);
         }
-        .hint {
-            font-size: 0.85rem;
-            color: #999;
-            margin-top: 10px;
-            display: block;
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+        .error-msg {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <img src="/data/ZID1_transparent2.png" alt="Robot" style="position: absolute; left: 12%; top: 35%; transform: translateY(-30%); width: 380px; max-width: 35vw; object-fit: contain; z-index: 0; opacity: 1; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));">
-
-
     <div class="login-card">
         <div style="font-size: 3rem; margin-bottom: 10px;">🎓</div>
-        <h1 style="font-size: 1.8rem; color: var(--primary-dark); font-weight: 900; margin: 0 0 5px 0;">Plateforme Éducative<br>LES CRETES</h1>
-        <div style="margin-bottom: 30px;"></div>
+        <h1>Plateforme Éducative<br>LES CRETES</h1>
+        
         <form id="login-form">
             <div class="input-group">
-                <label for="student-name">الاسم الكامل للتلميذ</label>
-                <input type="text" id="student-name" placeholder="أدخل اسمك هنا" required>
+                <label for="student-name">Nom de l'élève</label>
+                <input type="text" id="student-name" placeholder="Entrez votre nom" required>
             </div>
+            
             <div class="input-group">
-                <label for="password">كلمة السر</label>
+                <label for="password">Mot de passe</label>
                 <div class="password-wrapper">
-                    <input type="password" id="password" placeholder="أدخل كلمة السر" required>
+                    <input type="password" id="password" placeholder="Entrez le mot de passe" required>
                     <span class="toggle-password" id="toggle-password">
                         <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
@@ -139,55 +163,71 @@
                 </div>
             </div>
             
-            
             <div class="input-group">
-                <label class="form-label text-muted" style="font-size: 14px; margin-bottom: 5px; display: block; font-weight: bold; color: var(--primary-dark);">المستوى الدراسي</label>
-                <select name="student_level" id="student_level" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; outline: none; background: #fff; transition: border-color 0.3s; font-family: inherit;">
-                    <optgroup label="التعليم الأولي (الروض)">
-                        <option value="الروض - PS">الروض - PS</option>
-                        <option value="الروض - MS">الروض - MS</option>
-                        <option value="الروض - GS">الروض - GS</option>
-                    </optgroup>
-                    
-                    <optgroup label="السلك الابتدائي">
-                        <option value="الأول ابتدائي">الأول ابتدائي</option>
-                        <option value="الثاني ابتدائي">الثاني ابتدائي</option>
-                        <option value="الثالث ابتدائي">الثالث ابتدائي</option>
-                        <option value="الرابع ابتدائي">الرابع ابتدائي</option>
-                        <option value="الخامس ابتدائي">الخامس ابتدائي</option>
-                        <option value="السادس ابتدائي">السادس ابتدائي</option>
-                    </optgroup>
-                    
-                    <optgroup label="السلك الثانوي الإعدادي">
-                        <option value="الأولى إعدادي">الأولى إعدادي</option>
-                        <option value="الثانية إعدادي">الثانية إعدادي</option>
-                        <option value="الثالثة إعدادي">الثالثة إعدادي</option>
-                    </optgroup>
-                    
-                    <optgroup label="الجذوع المشتركة">
-                        <option value="جذع مشترك علمي">جذع مشترك علمي</option>
-                    </optgroup>
-                    
-                    <optgroup label="السنة الأولى باكالوريا (1 باك)">
-                        <option value="1 باك - علوم تجريبية">1 باك - علوم تجريبية</option>
-                        <option value="1 باك - علوم رياضية">1 باك - علوم رياضية</option>
-                        <option value="1 باك - علوم اقتصادية والتدبير">1 باك - علوم اقتصادية والتدبير</option>
-                    </optgroup>
-                    
-                    <optgroup label="السنة الثانية باكالوريا (2 باك)">
-                        <option value="2 باك - علوم فيزيائية" selected>2 باك - علوم فيزيائية</option>
-                        <option value="2 باك - علوم اقتصادية وتدبير">2 باك - علوم اقتصادية وتدبير</option>
-                    </optgroup>
-                </select>
+                <label>Niveau Scolaire</label>
+                <div class="level-categories">
+                    <button type="button" class="category-btn" onclick="selectCategory('maternelle', this)">Maternelle</button>
+                    <button type="button" class="category-btn" onclick="selectCategory('primaire', this)">Primaire</button>
+                    <button type="button" class="category-btn" onclick="selectCategory('college', this)">Collège</button>
+                    <button type="button" class="category-btn" onclick="selectCategory('lycee', this)">Lycée</button>
+                </div>
+                
+                <div id="maternelle-dropdown" class="levels-dropdown">
+                    <select class="level-select" id="select-maternelle">
+                        <option value="" disabled selected>Choisissez le niveau...</option>
+                        <option value="الروض - PS">Petite Section (PS)</option>
+                        <option value="الروض - MS">Moyenne Section (MS)</option>
+                        <option value="الروض - GS">Grande Section (GS)</option>
+                    </select>
+                </div>
+                
+                <div id="primaire-dropdown" class="levels-dropdown">
+                    <select class="level-select" id="select-primaire">
+                        <option value="" disabled selected>Choisissez le niveau...</option>
+                        <option value="الأول ابتدائي">1ère Année Primaire</option>
+                        <option value="الثاني ابتدائي">2ème Année Primaire</option>
+                        <option value="الثالث ابتدائي">3ème Année Primaire</option>
+                        <option value="الرابع ابتدائي">4ème Année Primaire</option>
+                        <option value="الخامس ابتدائي">5ème Année Primaire</option>
+                        <option value="السادس ابتدائي">6ème Année Primaire</option>
+                    </select>
+                </div>
+                
+                <div id="college-dropdown" class="levels-dropdown">
+                    <select class="level-select" id="select-college">
+                        <option value="" disabled selected>Choisissez le niveau...</option>
+                        <option value="الأولى إعدادي">1ère Année Collège</option>
+                        <option value="الثانية إعدادي">2ème Année Collège</option>
+                        <option value="الثالثة إعدادي">3ème Année Collège</option>
+                    </select>
+                </div>
+                
+                <div id="lycee-dropdown" class="levels-dropdown">
+                    <select class="level-select" id="select-lycee">
+                        <option value="" disabled selected>Choisissez le niveau...</option>
+                        <option value="جذع مشترك علمي">Tronc Commun Scientifique</option>
+                        <option value="1 باك - علوم تجريبية">1ère Bac - Sciences Expérimentales</option>
+                        <option value="1 باك - علوم رياضية">1ère Bac - Sciences Mathématiques</option>
+                        <option value="1 باك - علوم اقتصادية والتدبير">1ère Bac - Sciences Économiques</option>
+                        <option value="2 باك - علوم فيزيائية">2ème Bac - Sciences Physiques</option>
+                        <option value="2 باك - علوم اقتصادية وتدبير">2ème Bac - Sciences Économiques</option>
+                    </select>
+                </div>
+                
+                <!-- Hidden input to store the final selected value -->
+                <input type="hidden" id="student_level" name="student_level" required>
             </div>
 
-            <div class="error-msg" id="error-msg">كلمة السر خاطئة. الرجاء المحاولة مرة أخرى.</div>
+            <div class="error-msg" id="error-msg">Mot de passe incorrect. Veuillez réessayer.</div>
+            <div class="error-msg" id="error-level" style="display:none;">Veuillez sélectionner votre niveau.</div>
             
-            <button type="submit" class="login-btn">دخول</button>
+            <button type="submit" class="login-btn">Se connecter</button>
         </form>
     </div>
 
     <script>
+        let selectedLevelValue = "";
+
         document.getElementById('toggle-password').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eye-icon');
@@ -204,20 +244,62 @@
             }
         });
 
+        function selectCategory(category, btnElement) {
+            // Reset active buttons
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            // Set clicked button as active
+            btnElement.classList.add('active');
+            
+            // Hide all dropdowns
+            document.querySelectorAll('.levels-dropdown').forEach(div => div.style.display = 'none');
+            
+            // Show target dropdown
+            const targetDiv = document.getElementById(category + '-dropdown');
+            if(targetDiv) {
+                targetDiv.style.display = 'block';
+            }
+            
+            // Clear the selected value so user is forced to pick one from the new dropdown
+            selectedLevelValue = "";
+            document.getElementById('student_level').value = "";
+            
+            // Reset all selects to default
+            document.querySelectorAll('.level-select').forEach(sel => sel.selectedIndex = 0);
+        }
+
+        // Add event listeners to all select elements to update the hidden input
+        document.querySelectorAll('.level-select').forEach(select => {
+            select.addEventListener('change', function() {
+                selectedLevelValue = this.value;
+                document.getElementById('student_level').value = this.value;
+                document.getElementById('error-level').style.display = 'none';
+            });
+        });
+
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('student-name').value.trim();
             const pass = document.getElementById('password').value.trim();
-            
             const level = document.getElementById('student_level').value;
+            
+            if(!level) {
+                document.getElementById('error-level').style.display = 'block';
+                document.getElementById('error-msg').style.display = 'none';
+                return;
+            }
+            
             if(pass === '0000') {
                 localStorage.setItem('student_name', name);
                 localStorage.setItem('student_level', level);
                 window.location.href = '/dashboard?level=' + encodeURIComponent(level);
             } else {
                 document.getElementById('error-msg').style.display = 'block';
+                document.getElementById('error-level').style.display = 'none';
             }
         });
+        
+        // Initialize by selecting the first category to show its dropdown
+        // (Optional, we can leave them all hidden until clicked, which looks cleaner)
     </script>
 </body>
 </html>
