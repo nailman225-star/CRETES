@@ -69,11 +69,7 @@ def get_subjects_for_level(level):
         return ['communication', 'motor', 'islamic_basic', 'art_preschool', 'math_basic']
         
     elif "ابتدائي" in level:
-        subs = ['islamic', 'arabic', 'french', 'math', 'science']
-        if any(x in level for x in ["الرابع", "الخامس", "السادس"]):
-            subs.append('social')
-        subs.extend(['art_primary', 'pe'])
-        return subs
+        return ['islamic', 'arabic', 'french', 'math', 'science', 'history_geo', 'art_primary', 'pe']
         
     elif "إعدادي" in level:
         subs = ['islamic', 'arabic', 'french', 'english', 'math', 'physics']

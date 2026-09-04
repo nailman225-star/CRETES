@@ -11,26 +11,210 @@ MATERNELLE_CURRICULUM = {
     ]
 }
 
-PRIMAIRE_CURRICULUM = {
-    "Mathématiques": {
-        "semester_1": ["Les nombres", "Addition et soustraction", "La géométrie de base", "La mesure de longueurs"],
-        "semester_2": ["Multiplication (et division pour les grands)", "Les fractions", "Les figures géométriques", "Résolution de problèmes"]
+PRIMAIRE_COMPLET_CURRICULUM = {
+    "1ère AEP": {
+        "Mathématiques": {
+            "semester_1": ["Nombres de 0 à 30", "Géométrie et repérage", "Addition et soustraction simples", "Mesures de longueurs"],
+            "semester_2": ["Nombres de 0 à 99", "Formes géométriques usuelles", "Addition posée avec retenue", "Mesures de temps"]
+        },
+        "Français": {
+            "semester_1": ["Entrée à l'école", "La famille et la maison", "Animaux et alimentation"],
+            "semester_2": ["Vêtements et couleurs", "Jeux et nature", "Consolidation de lecture"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["الحروف الهجائية ومواقعها", "الحركات القصيرة والطويلة والمدود", "التنوين والكلمات البصرية"],
+            "semester_2": ["القرائية والتعبير الشفهي", "الخط والإملاء والتاءات", "الإنشاء وتكوين الجمل المفيدة"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["سور قصيرة (الفاتحة، الإخلاص، الفلق)", "العقيدة (الإيمان بالله)", "الاقتداء (صدق الرسول وأمانته)"],
+            "semester_2": ["أركان الإسلام والوضوء والصلاة", "بر الوالدين والأخلاق الفاضلة"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["الحواس الخمس", "حالة الماء في الطبيعة", "نظافة الجسم والصحة"],
+            "semester_2": ["حاجيات الكائنات الحية", "الحركة والسكون", "البيئة والمرافق المدرسية"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["الأحداث الشخصية واليومية", "الفضاء المدرسي والمحيط القريب"],
+            "semester_2": ["تنظيم الوقت والزمن اليومي", "اكتشاف القرية والمدينة"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["التلوين والخطوط الأساسية", "الأناشيد المدرسية والإيقاع"],
+            "semester_2": ["القص والتشكيل بالورق", "التعبير الجسمي الحركي"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["الألعاب الحركية التضامنية", "التوازن والتنسيق الحركي"],
+            "semester_2": ["السباقات السرعية البسيطة", "الألعاب الجماعية التربوية"]
+        }
     },
-    "Français": {
-        "semester_1": ["Unité 1 : Le monde des amis", "Unité 2 : La vie scolaire", "Unité 3 : La famille"],
-        "semester_2": ["Unité 4 : L'environnement", "Unité 5 : La santé et la maladie", "Unité 6 : Les voyages"]
+    "2ème AEP": {
+        "Mathématiques": {
+            "semester_1": ["Nombres de 0 à 100", "Addition et soustraction en colonne", "Figures planes et angles droits", "Le mètre et le centimètre"],
+            "semester_2": ["Nombres de 0 à 999", "Introduction à la multiplication", "Symétrie axiale", "Masses (kg et g)"]
+        },
+        "Français": {
+            "semester_1": ["L'école et la rentrée", "La solidarité au village", "Santé et hygiène"],
+            "semester_2": ["Voyages et transports", "La nature et la forêt", "Fêtes et contes"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["النصوص القرائية والسردية", "الصرف (الفعل الصحيح والضمائر)", "التراكيب (الجملة الفعلية والاسمية)"],
+            "semester_2": ["الإملاء (الشمسي والقمري، التاءات)", "التعبير الكتابي وترتيب الجمل", "التطبيقات ودعم التعثرات"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["سور القرآن والتجويد المبسط", "أركان الإيمان", "طفولة الرسول صلى الله عليه وسلم"],
+            "semester_2": ["أحكام الوضوء وصفة الصلاة", "حقوق الجار والآداب العامة"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["خصائص الهواء والتنفس", "التغذية عند الإنسان والحيوان", "حركات الجسم والمفاصل"],
+            "semester_2": ["مصادر الماء وحمايته", "نمو النباتات والبذور", "الضوء والظلال"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["معالم من تاريخنا المحلي", "مكونات البيئة المحلية والجهوية"],
+            "semester_2": ["تطور وسائل النقل والعيش", "الخريطة البسيطة للمنطقة"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["التربية التشكلية وتنسيق الألوان", "الأناشيد الوطنية والتربوية"],
+            "semester_2": ["الرسم الهندسي البسيط", "المسرح المدرسي المصغر"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["القفز والتوازن", "الألعاب الجماعية المنظمة"],
+            "semester_2": ["العدو الريفي المدرسي", "الرشاقة والمرونة البدنية"]
+        }
     },
-    "Langue Arabe": {
-        "semester_1": ["مجال العائلة", "مجال المدرسة", "مجال التغذية والصحة"],
-        "semester_2": ["مجال القرية والمدينة", "مجال البيئة", "مجال الرحلات والأسفار"]
+    "3ème AEP": {
+        "Mathématiques": {
+            "semester_1": ["Nombres jusqu'à 9999", "Multiplication posée", "Droites parallèles et perpendiculaires", "Capacités (Litre)"],
+            "semester_2": ["Fractions simples", "Division euclidienne", "Périmètres (carré, rectangle)", "Masses et tableaux statistiques"]
+        },
+        "Français": {
+            "semester_1": ["Rentrée et règles de vie", "Petits métiers et artisanat", "Manifestations culturelles"],
+            "semester_2": ["Ville et campagne", "Inventions et technologies", "L'eau et la planète"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["النصوص الوظيفية والشعرية", "الصرف (تصريف الفعل الصحيح)", "التراكيب (المفعول به والمطلق والحال)"],
+            "semester_2": ["الإملاء (الهمزات والوصل والقطع)", "التعبير الكتابي ورسائل شخصية", "التطبيقات الكتابية"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["القرآن الكريم (النبأ، النازعات)", "توحيد الله وأسماؤه الحسنى", "هجرة الرسول والصبر"],
+            "semester_2": ["فرائض الصلاة والجماعة", "العدل والإنصاف وطلب العلم"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["المواد الصلبة والسائلة وتغييراتها", "تنوع الكائنات الحية", "صحة الجهاز الهضمي والتنفسي"],
+            "semester_2": ["الدارة الكهربائية البسيطة", "القوى والحركات (دفع وجر)", "دورة الماء والتلوث"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["أزمان تاريخية وتطور الأدوات", "مظاهر سطح الأرض والمياه"],
+            "semester_2": ["الأنشطة الاقتصادية بالقرية والمدينة", "تمثيل المجال الجغرافي بالرسوم"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["الفنون التشكيلية والزخرفة المغربية", "الإيقاع الصوتي والموسيقي"],
+            "semester_2": ["الابتكار اليدوي والتشكيل بالصلصال", "التعبير الجسدي الإيقاعي"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["الكرة الطائرة واليد المصغرة", "السرعة والتحمل"],
+            "semester_2": ["القفز الطولي والثلاثي", "الألعاب الجماعية والتنافسية"]
+        }
     },
-    "Éveil Scientifique": {
-        "semester_1": ["Les sens et la santé", "L'alimentation", "Le mouvement"],
-        "semester_2": ["L'eau et la nature", "L'électricité simple", "Les plantes et les animaux"]
+    "4ème AEP": {
+        "Mathématiques": {
+            "semester_1": ["Grands nombres jusqu'à 999 999", "Multiplication avancée", "Cercle, disque et triangles", "Longueurs et masses"],
+            "semester_2": ["Nombres décimaux (Introduction)", "Addition et soustraction décimale", "Les quadrilatères", "Périmètres, aires et proportionnalité"]
+        },
+        "Français": {
+            "semester_1": ["Citoyenneté et civisme", "Bénévolat et vie associative", "Hygiène et santé"],
+            "semester_2": ["Les régions du Maroc", "L'énergie au quotidien", "Inventions et transports"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["النصوص الوظيفية", "الصرف (الفعل المعتل)", "التراكيب (الأسماء الخمسة، النعت، التوكيد)"],
+            "semester_2": ["الإملاء (أسماء الإشارة والموصولة)", "التعبير الكتابي والتقارير", "التطبيقات"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["القرآن الكريم (المطففين، الانشقاق)", "الإيمان باليوم الآخر والقضاء", "مكارم الأخلاق النبوية"],
+            "semester_2": ["صلاة الجمعة والعيدين والصيام", "إيثار الغير والحكمة في التصرف"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["الخلائط والمحاليل المائية", "التكاثر عند النباتات والحيوانات", "الجهاز الهيكلي والعضلي"],
+            "semester_2": ["الضوء واللون وانعكاسه", "الكهرباء المنزلية والوقاية", "التنوع البيولوجي والبيئة"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["تاريخ المغرب القديم (الفينيقيون والقرطاجيون والمور)", "المغرب: الموقع والحدود والخصائص العامة"],
+            "semester_2": ["الأمازيغ وتاريخ الحضارات المغاربية", "السكان والأنشطة الاقتصادية بجهات المغرب"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["الرسم المنظوري والخط العربي", "المقامات الموسيقية والأناشيد"],
+            "semester_2": ["الصناعة التقليدية المغربية وتصميماتها", "المسرح المدرسي والتعبير الفني"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["كرة القدم المصغرة والمهارات الفردية", "التنسيق الحركي والجري السريع"],
+            "semester_2": ["القفز العالي وسباقات التتابع", "اللياقة البدنية والألعاب الجماعية"]
+        }
     },
-    "Éducation Islamique": {
-        "semester_1": ["Coran : Sourates courtes", "Dogme : Croire en Dieu", "Culte : Les ablutions"],
-        "semester_2": ["Coran : Récitation et compréhension", "Biographie du Prophète (Sira)", "Morale et bon comportement"]
+    "5ème AEP": {
+        "Mathématiques": {
+            "semester_1": ["Nombres décimaux (Ordre et opérations)", "Multiplication et division par un entier", "Propriétés des angles", "Unités d'aires (m²)"],
+            "semester_2": ["Nombres rationnels et fractions", "Proportionnalité et pourcentages", "Pavé droit et cube (Volumes)", "Graphiques statistiques"]
+        },
+        "Français": {
+            "semester_1": ["Art et traditions du Maroc", "Droits et devoirs de l'enfant", "L'eau et la vie"],
+            "semester_2": ["Agriculture et industrie", "Internet et médias", "Sport et loisirs"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["النصوص المسترسلة والوظيفية", "الصرف (اسم الزمان والمكان والآلة)", "التراكيب (المفعول لأجله، فيه، التمييز)"],
+            "semester_2": ["الإملاء (الهمزات وتنوين المقصور)", "التعبير (مقال صحفي وسيرة ذاتية)", "التطبيقات"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["القرآن الكريم (الملك، القلم)", "عظمة الله في خلقه", "صبر الرسل وثباتهم"],
+            "semester_2": ["أحكام الزكاة والصيام", "التضامن الاجتماعي وحقوق الطفل"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["التحولات الفيزيائية والكيميائية", "الجهاز التنفسي والدوراني", "السلاسل الغذائية والتوازن البيئي"],
+            "semester_2": ["الطاقة الكهربائية وأنواعها", "المغناطيسية وتطبيقاتها", "علوم الأرض والزلازل"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["المغرب في العصر الوسيط (المرابطون والموحدون)", "البيئة والموارد الطبيعية في المغرب والمحافظة عليها"],
+            "semester_2": ["المغرب في عهد المرينيين والسعديين", "المناخ والنباتات والشبكة المائية بالمغرب"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["فن الزخرفة الإسلامية والمعمار", "التذوق الموسيقي والأناشيد الوطنية"],
+            "semester_2": ["التشكيل بالمواد الطبيعية والتدوير", "التعبير المسرحي والتشخيصي"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["الكرة الطائرة والمهارات الدفاعية", "التحمل والسرعة القصوى"],
+            "semester_2": ["رمي الجلة والسباقات الطويلة", "الألعاب الجماعية وقواعد الروح الرياضية"]
+        }
+    },
+    "6ème AEP": {
+        "Mathématiques": {
+            "semester_1": ["Opérations combinées sur entiers et décimaux", "Fractions et rationnels (Calculs)", "Symétrie axiale et translation", "Unités agraires et volumes"],
+            "semester_2": ["Division d'un décimal par un décimal", "Échelles et vitesses", "Aires du cercle et disques", "Volume du cylindre et statistiques"]
+        },
+        "Français": {
+            "semester_1": ["Civilisations du monde", "Solidarité internationale", "Développement durable"],
+            "semester_2": ["Sciences et inventions", "Patrimoine et musiques", "Préparation au Collège"]
+        },
+        "Langue Arabe": {
+            "semester_1": ["النصوص القرائية الحضارية", "الصرف (المجرد والمزيد والأفعال الخمسة)", "التراكيب (المنادى، المستثنى، المفعول معه)"],
+            "semester_2": ["الإملاء والهمزات المتفرقة", "التعبير الكتابي والتلخيص الشامل", "الإعداد للامتحان الموحد السداسي"]
+        },
+        "Éducation Islamique": {
+            "semester_1": ["سورة يس وأحكام التجويد", "توحيد الألوهية والقضاء والقدر", "معاملات الرسول مع أهله"],
+            "semester_2": ["أحكام الحج والعمرة", "حقوق الجار والوطن ونبذ التطرف"]
+        },
+        "Éveil Scientifique": {
+            "semester_1": ["التلوث البيئي وأسبابه", "التكاثر الجنسي وغير الجنسي", "المناعة الطبيعية والجرثومية"],
+            "semester_2": ["الكهرباء المتحركة (توالي وتوازي)", "الوراثة والصفات", "المراجعة الشاملة للإعدادي"]
+        },
+        "Histoire et Géographie": {
+            "semester_1": ["المغرب الحديث والمعاصر (الاستعمار والمقاومة)", "المغرب في العالم: الروابط الاقتصادية والسياسية"],
+            "semester_2": ["ثورة الملك والشعب ونيل الاستقلال", "الاتحاد الإفريقي والمحيط الجهوي والدولي للمغرب"]
+        },
+        "Éducation Artistique": {
+            "semester_1": ["الفنون المعاصرة والتراث المغاربي", "الإيقاعات الموسيقية والأناشيد الكبرى"],
+            "semester_2": ["مشاريع الفنون التشكيلية الختامية", "العروض المسرحية المدرسية الكبرى"]
+        },
+        "Éducation Physique": {
+            "semester_1": ["الألعاب الجماعية التنافسية (كرة القدم/السلة)", "المهارات البدنية الأساسية للإعدادي"],
+            "semester_2": ["السباقات والمطاردات المدرسية", "الاختبارات البدنية النهائية للشهادة الابتدائية"]
+        }
     }
 }
 
@@ -725,7 +909,8 @@ def get_curriculum(level, subject_id):
         "arabic": "Langue Arabe",
         "informatique": "Informatique",
         "pe": "Éducation Physique",
-        "science": "Éveil Scientifique"
+        "science": "Éveil Scientifique",
+        "art_primary": "Éducation Artistique"
     }
 
     subject_name_key = subject_map.get(subject_id, "")
@@ -736,8 +921,22 @@ def get_curriculum(level, subject_id):
 
     # PRIMAIRE
     if "ابتدائي" in level_lower:
-        if subject_name_key in PRIMAIRE_CURRICULUM:
-            return PRIMAIRE_CURRICULUM[subject_name_key]
+        primaire_level_key = None
+        if "الأول" in level_lower or "1" in level_lower:
+            primaire_level_key = "1ère AEP"
+        elif "الثاني" in level_lower or "2" in level_lower:
+            primaire_level_key = "2ème AEP"
+        elif "الثالث" in level_lower or "3" in level_lower:
+            primaire_level_key = "3ème AEP"
+        elif "الرابع" in level_lower or "4" in level_lower:
+            primaire_level_key = "4ème AEP"
+        elif "الخامس" in level_lower or "5" in level_lower:
+            primaire_level_key = "5ème AEP"
+        elif "السادس" in level_lower or "6" in level_lower:
+            primaire_level_key = "6ème AEP"
+
+        if primaire_level_key and subject_name_key in PRIMAIRE_COMPLET_CURRICULUM[primaire_level_key]:
+            return PRIMAIRE_COMPLET_CURRICULUM[primaire_level_key][subject_name_key]
             
     # COLLEGE
     if "إعدادي" in level_lower:
