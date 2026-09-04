@@ -1,14 +1,190 @@
-MATERNELLE_CURRICULUM = {
-    "semester_1": [
-        "Thème 1 : Mon école et mes amis",
-        "Thème 2 : Mon corps et ma santé",
-        "Thème 3 : Ma famille et mon foyer"
-    ],
-    "semester_2": [
-        "Thème 4 : Le monde de la nature (Plantes et animaux)",
-        "Thème 5 : L'eau, source de vie",
-        "Thème 6 : Les jeux et l'espace créatif"
-    ]
+MATERNELLE_COMPLET_CURRICULUM = {
+    "Petite Section (PS)": {
+        "Langues et Communication": {
+            "semester_1": [
+                "Accueil, rituels du matin et socialisation au sein de la classe",
+                "Expression orale : exprimer ses besoins fondamentaux et son prénom",
+                "Écoute active de contes traditionnels très courts et imagiers"
+            ],
+            "semester_2": [
+                "Enrichissement du vocabulaire de l'environnement proche (classe, famille)",
+                "Comptines, chansons enfantines et mémorisation auditive de base",
+                "Jeux de doigts, saynètes simples et expression des émotions de base"
+            ]
+        },
+        "Outils de la Pensée et Logique (Mathématiques)": {
+            "semester_1": [
+                "Tri et classification d'objets selon un critère unique (couleur ou taille)",
+                "Reconnaissance visuelle des formes géométriques de base (cercle, carré)",
+                "Notions de quantité intuitive (beaucoup / peu, un / plusieurs)"
+            ],
+            "semester_2": [
+                "Sériations simples de deux tailles ou deux couleurs alternées",
+                "Initiation au dénombrement tactile de 1 à 3",
+                "Premiers tracés graphiques libres et dirigés (lignes verticales et horizontales)"
+            ]
+        },
+        "Éducation Sensorielle et Motrice": {
+            "semester_1": [
+                "Exploration du schéma corporel et équilibre global",
+                "Repérage dans l'espace proche (dedans / dehors, haut / bas)",
+                "Parcours moteurs guidés, marche, courses et sauts sur place"
+            ],
+            "semester_2": [
+                "Coordination fine : manipulation de pâte à modeler et enfilage de perles",
+                "Jeux rythmiques, rondes et rondes dansées en groupe",
+                "Expression corporelle libre et participation aux jeux d'imitation"
+            ]
+        },
+        "Éducation Islamique et Citoyenneté": {
+            "semester_1": [
+                "Mémorisation de la Sourate Al-Fatiha et Al-Ikhlas",
+                "Apprentissage des formules de politesse islamiques (Bismillah, Salam)",
+                "Histoires simples des prophètes adaptées à la petite enfance"
+            ],
+            "semester_2": [
+                "Valeurs du partage, de l'amour du bien et de l'entraide entre camarades",
+                "Propreté corporelle, lavage des mains et respect de l'hygiène de vie",
+                "Belles manières au quotidien (respect des adultes et des jouets)"
+            ]
+        },
+        "Éducation Artistique et Créative": {
+            "semester_1": [
+                "Premières approches de la peinture au doigt et empreintes",
+                "Découverte des couleurs primaires (rouge, bleu, jaune)",
+                "Écoute de sons de la nature et bruits de la vie quotidienne"
+            ],
+            "semester_2": [
+                "Collages libres de petits éléments sur supports cartonnés",
+                "Modelage d'formes simples (boules, boudins en pâte)",
+                "Activités rythmiques et chansons mimées en chœur"
+            ]
+        }
+    },
+    "Moyenne Section (MS)": {
+        "Langues et Communication": {
+            "semester_1": [
+                "Rituels avancés, date, météo et langage situationnel",
+                "Récit de vécus, formulation de phrases simples de type sujet-verbe-complément",
+                "Lecture d'images séquentielles et mise en ordre d'une histoire courte"
+            ],
+            "semester_2": [
+                "Comptines enrichies, poésies rythmées et mémorisation de textes courts",
+                "Jeux de rôles, dialogues guidés et prise de parole en public",
+                "Graphisme préparatoire à l'écriture : boucles, ponts et vagues"
+            ]
+        },
+        "Outils de la Pensée et Logique (Mathématiques)": {
+            "semester_1": [
+                "Classification multicritères (forme, couleur et taille simultanément)",
+                "Dénombrement rigoureux d'objets de 1 à 5",
+                "Repérage spatial relatif (devant / derrière, sur / sous, à côté de)"
+            ],
+            "semester_2": [
+                "Suites logiques à motif répété (alternance de 2 ou 3 éléments)",
+                "Association quantité-chiffre de 1 à 5 (et introduction jusqu'à 10)",
+                "Reconnaissance des formes géométriques complexes (triangle, rectangle) et tracés"
+            ]
+        },
+        "Éducation Sensorielle et Motrice": {
+            "semester_1": [
+                "Maîtrise de l'équilibre dynamique (poutre basse, sauts en contrebas)",
+                "Latéralité affirmée (reconnaissance de la main droite et gauche)",
+                "Jeux collectifs d'opposition et de coopération (ballons, relais)"
+            ],
+            "semester_2": [
+                "Coordination fine avancée : utilisation des ciseaux pour découper des lignes droites",
+                "Parcours moteurs complexes (grimper, ramper, slalomer)",
+                "Expression corporelle en rythme avec des accessoires (cerceaux, rubans)"
+            ]
+        },
+        "Éducation Islamique et Citoyenneté": {
+            "semester_1": [
+                "Mémorisation des courtes sourates (An-Nas, Al-Falaq, Al-Masad)",
+                "Invocations quotidiennes (avant de dormir, en entrant/sortant)",
+                "Biographies simplifiées des prophètes (Nuh, Ibrahim)"
+            ],
+            "semester_2": [
+                "Apprentissage des valeurs de tolérance, de respect et de solidarité",
+                "Règles de vie en communauté et respect de l'environnement de l'école",
+                "Bonnes manières à table et respect de la nourriture"
+            ]
+        },
+        "Éducation Artistique et Créative": {
+            "semester_1": [
+                "Techniques mixtes de peinture au pinceau et éponges",
+                "Mélange des couleurs primaires pour obtenir des secondaires",
+                "Chants patriotiques et religieux simples"
+            ],
+            "semester_2": [
+                "Bricolage thématique (fêtes nationales, saisons de l'année)",
+                "Modelage d'objets reconnaissables (animaux, fruits)",
+                "Création de rythmes corporels et percussions simples"
+            ]
+        }
+    },
+    "Grande Section (GS)": {
+        "Langues et Communication": {
+            "semester_1": [
+                "Expression orale fluide, argumentation simple et description détaillée d'images",
+                "Consciousness phonologique : reconnaissance des syllabes d'attaque et des rimes",
+                "Premiers pas vers l'écrit : reconnaissance des lettres capitales et écriture du prénom"
+            ],
+            "semester_2": [
+                "Lecture de mots et de courtes phrases composées de syllabes simples",
+                "Production d'écrits collectifs dictés à l'adulte (rédaction d'une carte, d'une recette)",
+                "Préparation rigoureuse aux exigences graphiques de la 1ère AEP du primaire"
+            ]
+        },
+        "Outils de la Pensée et Logique (Mathématiques)": {
+            "semester_1": [
+                "Dénombrement de collections allant jusqu'à 10 éléments et plus",
+                "Résolution de petits problèmes additifs oraux (ajouter, enlever)",
+                "Repérage dans l'espace cartésien simple (cases et quadrillages de repérage)"
+            ],
+            "semester_2": [
+                "Écriture chiffrée des nombres de 0 à 10 et comparaison de quantités (<, >, =)",
+                "Notions temporelles avancées (jours de la semaine, mois, saisons, hier/aujourd'hui/demain)",
+                "Géométrie de l'espace : reproduction de figures complexes sur papier pointé ou quadrillé"
+            ]
+        },
+        "Éducation Sensorielle et Motrice": {
+            "semester_1": [
+                "Maîtrise complète de l'agilité corporelle (course rapide, lancers précis)",
+                "Jeux d'équipe structurés avec respect des règles collectives strictes",
+                "Maîtrise de l'espace global et orientation en milieu ouvert"
+            ],
+            "semester_2": [
+                "Découpage précis de formes géométriques complexes, pliages et assemblages d'objets",
+                "Équilibre sur des plans inclinés et coordination visuo-motrice poussée",
+                "Bilan psychomoteur de fin de cycle préscolaire"
+            ]
+        },
+        "Éducation Islamique et Citoyenneté": {
+            "semester_1": [
+                "Mémorisation approfondie des sourates courtes (Al-Asr, Al-Quraysh, Al-Ma'un)",
+                "Apprentissage des bases de l'éthique musulmane et des bonnes manières (Adab)",
+                "Histoires édifiantes de la Sira prophétique adaptées à la fin du préscolaire"
+            ],
+            "semester_2": [
+                "Valeurs de la citoyenneté, amour de la patrie et respect des symboles nationaux",
+                "Sensibilisation au développement durable, propreté des espaces publics et écologie",
+                "Préparation spirituelle et comportementale à l'entrée au cycle primaire (1ère AEP)"
+            ]
+        },
+        "Éducation Artistique et Créative": {
+            "semester_1": [
+                "Peinture créative sur divers supports, techniques de graphisme décoratif",
+                "Chants choraux rythmés, mémorisation de répertoires officiels",
+                "Arts plastiques appliqués à l'expression culturelle marocaine"
+            ],
+            "semester_2": [
+                "Projets artistiques de fin d'année (spectacle de fin de préscolaire, saynètes)",
+                "Conception d'objets artistiques individuels et collectifs",
+                "Exposition des travaux d'élèves et évaluation des compétences créatives"
+            ]
+        }
+    }
 }
 
 PRIMAIRE_COMPLET_CURRICULUM = {
@@ -910,14 +1086,33 @@ def get_curriculum(level, subject_id):
         "informatique": "Informatique",
         "pe": "Éducation Physique",
         "science": "Éveil Scientifique",
-        "art_primary": "Éducation Artistique"
+        "art_primary": "Éducation Artistique",
+        "communication": "Langues et Communication",
+        "math_basic": "Outils de la Pensée et Logique (Mathématiques)",
+        "motor": "Éducation Sensorielle et Motrice",
+        "islamic_basic": "Éducation Islamique et Citoyenneté",
+        "art_preschool": "Éducation Artistique et Créative"
     }
 
     subject_name_key = subject_map.get(subject_id, "")
     
-    # MATERNELLE
-    if "الروض" in level_lower:
-        return MATERNELLE_CURRICULUM
+        # MATERNELLE
+    if "الروض" in level_lower or "ps" in level_lower or "ms" in level_lower or "gs" in level_lower or "" in level_lower:
+        maternelle_level_key = None
+        if "ps" in level_lower or "صغير" in level_lower:
+            maternelle_level_key = "Petite Section (PS)"
+        elif "ms" in level_lower or "متوسط" in level_lower:
+            maternelle_level_key = "Moyenne Section (MS)"
+        elif "gs" in level_lower or "كبير" in level_lower:
+            maternelle_level_key = "Grande Section (GS)"
+            
+        if maternelle_level_key and subject_name_key in MATERNELLE_COMPLET_CURRICULUM[maternelle_level_key]:
+            return MATERNELLE_COMPLET_CURRICULUM[maternelle_level_key][subject_name_key]
+        
+        # Fallback to PS if not matched perfectly but we are in maternelle
+        if subject_name_key in MATERNELLE_COMPLET_CURRICULUM["Petite Section (PS)"]:
+             return MATERNELLE_COMPLET_CURRICULUM["Petite Section (PS)"][subject_name_key]
+
 
     # PRIMAIRE
     if "ابتدائي" in level_lower:
