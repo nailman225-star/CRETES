@@ -183,6 +183,27 @@
     </div>
 
     <script>
+        const levelTranslations = {
+            "الروض - PS": "Petite Section (PS)",
+            "الروض - MS": "Moyenne Section (MS)",
+            "الروض - GS": "Grande Section (GS)",
+            "الأول ابتدائي": "1ère Année Primaire",
+            "الثاني ابتدائي": "2ème Année Primaire",
+            "الثالث ابتدائي": "3ème Année Primaire",
+            "الرابع ابتدائي": "4ème Année Primaire",
+            "الخامس ابتدائي": "5ème Année Primaire",
+            "السادس ابتدائي": "6ème Année Primaire",
+            "الأولى إعدادي": "1ère Année Collège",
+            "الثانية إعدادي": "2ème Année Collège",
+            "الثالثة إعدادي": "3ème Année Collège",
+            "جذع مشترك علمي": "Tronc Commun Scientifique",
+            "1 باك - علوم تجريبية": "1ère Bac - Sciences Expérimentales",
+            "1 باك - علوم رياضية": "1ère Bac - Sciences Mathématiques",
+            "1 باك - علوم اقتصادية والتدبير": "1ère Bac - Sciences Économiques",
+            "2 باك - علوم فيزيائية": "2ème Bac - Sciences Physiques",
+            "2 باك - علوم اقتصادية وتدبير": "2ème Bac - Sciences Économiques"
+        };
+
         window.onload = () => {
             const studentName = localStorage.getItem('student_name');
             if(!studentName) {
@@ -209,7 +230,8 @@
             
             // Ensure span is updated
             if (currentLevel) {
-                document.getElementById('display-level').innerText = currentLevel;
+                const displayLevel = levelTranslations[currentLevel] || currentLevel;
+                document.getElementById('display-level').innerText = displayLevel;
                 localStorage.setItem("student_level", currentLevel);
             }
             

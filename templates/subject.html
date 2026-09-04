@@ -8,139 +8,182 @@
         :root {
             --primary: #4CAF50;
             --primary-dark: #2E7D32;
-            --bg: #f8f9fa;
+            --bg: #f0f2f5;
             --text: #2c3e50;
-            --card-bg: #ffffff;
             --bot-msg: #e8f5e9;
-            --user-msg: #ffffff;
+            --user-msg: #f8f9fa;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; height: 100vh; color: var(--text); }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg);
+            background-image: linear-gradient(135deg, rgba(76,175,80,0.1) 0%, rgba(46,125,50,0.1) 100%);
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            color: var(--text); 
+        }
         
-        .sidebar { width: 300px; background: white; border-right: 1px solid #ddd; padding: 20px; overflow-y: auto; box-shadow: 2px 0 10px rgba(0,0,0,0.05); }
-        .sidebar h2 { color: var(--primary-dark); font-size: 1.5rem; margin-top: 0; }
-        .sidebar-section { margin-top: 30px; }
-        .sidebar-section h3 { font-size: 1.1rem; color: #555; border-bottom: 2px solid var(--primary); padding-bottom: 5px; margin-bottom: 15px; }
+        .app-container {
+            display: flex;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .sidebar { width: 300px; background: #f8f9fa; border-right: 1px solid #e0e0e0; padding: 25px 20px; overflow-y: auto; display: flex; flex-direction: column; }
+        .sidebar h2 { color: var(--primary-dark); font-size: 1.5rem; margin-top: 0; margin-bottom: 5px; }
+        .sidebar-level { font-size: 0.95rem; font-weight: bold; color: #666; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #e0e0e0; }
+        
+        .sidebar-section { margin-bottom: 25px; }
+        .sidebar-section h3 { font-size: 1.05rem; color: #555; margin-bottom: 15px; }
         .sidebar-section ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar-section li { margin-bottom: 10px; }
-        .sidebar-section a { text-decoration: none; color: var(--text); display: block; padding: 10px; border-radius: 8px; transition: background 0.3s; }
-        .sidebar-section a:hover { background: #f0f2f5; color: var(--primary-dark); font-weight: bold; }
-        .back-btn { display: block; text-align: center; background: var(--primary); color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 20px; transition: background 0.3s; }
-        .back-btn:hover { background: var(--primary-dark); }
+        .sidebar-section li { margin-bottom: 8px; }
+        .sidebar-section a { text-decoration: none; color: #444; display: block; padding: 10px 15px; border-radius: 10px; transition: all 0.2s; background: white; border: 1px solid #eee; }
+        .sidebar-section a:hover { background: rgba(76,175,80,0.1); border-color: var(--primary); color: var(--primary-dark); font-weight: bold; transform: translateX(5px); }
         
-        .main-chat { flex-grow: 1; display: flex; flex-direction: column; position: relative; }
+        .back-btn { margin-top: auto; display: block; text-align: center; background: white; border: 2px solid var(--primary); color: var(--primary-dark); text-decoration: none; padding: 12px; border-radius: 12px; font-weight: bold; transition: all 0.3s; }
+        .back-btn:hover { background: var(--primary); color: white; }
+        
+        .main-chat { flex-grow: 1; display: flex; flex-direction: column; position: relative; background: white; }
         .chat-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 10; }
-        .chat-header h1 { margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .chat-header h1 { margin: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
         
         .chat-controls { display: flex; gap: 10px; align-items: center; }
-        .zoom-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 5px; cursor: pointer; padding: 5px 10px; font-weight: bold; transition: background 0.3s; }
+        .zoom-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 6px; cursor: pointer; padding: 6px 12px; font-weight: bold; transition: background 0.3s; }
         .zoom-btn:hover { background: rgba(255,255,255,0.4); }
         
-        /* Language Dropdown in Header */
-        .lang-select { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); padding: 5px 10px; border-radius: 5px; font-weight: bold; outline: none; cursor: pointer; }
+        .lang-select { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.5); padding: 6px 12px; border-radius: 6px; font-weight: bold; outline: none; cursor: pointer; }
         .lang-select option { color: black; }
         
-        .status-bar { font-size: 0.9rem; font-weight: bold; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 15px; }
+        .status-bar { font-size: 0.9rem; font-weight: bold; background: rgba(0,0,0,0.2); padding: 6px 12px; border-radius: 15px; }
 
-        .chat-container { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; font-size: 1rem; position: relative; }
+        .chat-container { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; font-size: 1rem; position: relative; background: #ffffff; }
         .message-row { display: flex; gap: 15px; max-width: 85%; }
         .message-row.user { align-self: flex-end; flex-direction: row-reverse; }
         .message-row.bot { align-self: flex-start; }
-        .avatar { font-size: 2rem; width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; }
         
-        .message { padding: 15px 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.6; }
-        .message-row.user .message { background: var(--user-msg); border-bottom-right-radius: 5px; }
-        .message-row.bot .message { background: var(--bot-msg); border-bottom-left-radius: 5px; border: 1px solid rgba(76, 175, 80, 0.2); }
+        .avatar { font-size: 1.8rem; width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08); flex-shrink: 0; border: 1px solid #eee; }
+        
+        .message { padding: 15px 20px; border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); line-height: 1.5; border: 1px solid #eee; }
+        .message-row.user .message { background: var(--user-msg); border-bottom-right-radius: 4px; }
+        .message-row.bot .message { background: var(--bot-msg); border-bottom-left-radius: 4px; border-color: rgba(76, 175, 80, 0.2); }
         
         .message img { max-width: 100%; border-radius: 10px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
-        .input-area { padding: 20px 30px; background: white; border-top: 1px solid #ddd; display: flex; gap: 15px; align-items: center; }
-        .input-area input { flex-grow: 1; padding: 15px 20px; border: 2px solid #e0e0e0; border-radius: 30px; font-size: 1.1rem; outline: none; transition: border-color 0.3s; }
+        .input-area { padding: 20px 30px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 15px; align-items: center; }
+        .input-area input { flex-grow: 1; padding: 15px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1rem; outline: none; transition: border-color 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
         .input-area input:focus { border-color: var(--primary); }
-        .input-area button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s, transform 0.1s; }
-        .input-area button:hover { background: var(--primary-dark); }
-        .input-area button:active { transform: scale(0.95); }
+        .input-area button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(76,175,80,0.3); }
+        .input-area button:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(76,175,80,0.4); }
+        .input-area button:active { transform: translateY(0); }
         
-        .loading { display: none; align-self: flex-start; margin-left: 65px; color: #666; font-style: italic; font-size: 0.95rem; }
+        .loading { display: none; align-self: flex-start; margin-left: 65px; color: #888; font-style: italic; font-size: 0.9rem; }
         
-        /* Robot overlay */
-        .chat-robot {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 120px;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .chat-robot { position: absolute; bottom: 20px; right: 20px; width: 120px; opacity: 0.6; pointer-events: none; z-index: 0; }
 
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { display: none; } /* Hide sidebar on mobile */
+        @media (max-width: 900px) {
+            .app-container { width: 100%; height: 100vh; border-radius: 0; }
+            .sidebar { display: none; }
             .message-row { max-width: 95%; }
             .chat-robot { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>{{ subject_name }}</h2>
-        <div class="sidebar-section">
-            <h3>📚 Cours et Leçons</h3>
-            <ul>
-                <li><a href="#">Unité 1 : Introduction</a></li>
-                <li><a href="#">Unité 2 : Concepts Clés</a></li>
-                <li><a href="#">Unité 3 : Approfondissement</a></li>
-            </ul>
-        </div>
-        <div class="sidebar-section">
-            <h3>📝 Exercices et Examens</h3>
-            <ul>
-                <li><a href="#">Exercices Pratiques</a></li>
-                <li><a href="#">Contrôles</a></li>
-            </ul>
-        </div>
-        <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
-    </div>
-    
-    <div class="main-chat">
-        <div class="chat-header">
-            <h1><span>{{ tutor_emoji }}</span> {{ tutor_name }}</h1>
-            <div class="chat-controls">
-                <button onclick="zoomChat(0.1)" class="zoom-btn" title="Zoom In">A+</button>
-                <button onclick="zoomChat(-0.1)" class="zoom-btn" title="Zoom Out">A-</button>
-                <select id="chat-lang" class="lang-select">
-                    <option value="fr">Français</option>
-                    <option value="ar">العربية</option>
-                    <option value="en">English</option>
-                </select>
-                <span class="status-bar" id="remaining-count">Restant : 30</span>
-            </div>
-        </div>
-        
-        <div class="chat-container" id="chat-box">
-            <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="chat-robot">
+    <div class="app-container">
+        <div class="sidebar">
+            <h2>{{ subject_name }}</h2>
+            <div class="sidebar-level" id="sidebar-level">Niveau : ...</div>
             
-            <div class="message-row bot">
-                <div class="avatar">{{ tutor_emoji }}</div>
-                <div class="message" id="welcome-msg"></div>
+            <div class="sidebar-section">
+                <h3>📚 Cours et Leçons</h3>
+                <ul>
+                    <li><a href="#">Unité 1 : Introduction</a></li>
+                    <li><a href="#">Unité 2 : Concepts Clés</a></li>
+                    <li><a href="#">Unité 3 : Approfondissement</a></li>
+                </ul>
             </div>
+            <div class="sidebar-section">
+                <h3>📝 Exercices et Examens</h3>
+                <ul>
+                    <li><a href="#">Exercices Pratiques</a></li>
+                    <li><a href="#">Contrôles</a></li>
+                </ul>
+            </div>
+            <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
         </div>
         
-        <div class="loading" id="loading-indicator">En train d'écrire...</div>
-        
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Écrivez votre question ici..." onkeypress="handleKeyPress(event)">
-            <button id="send-btn" onclick="sendMessage()">Envoyer</button>
+        <div class="main-chat">
+            <div class="chat-header">
+                <h1><span>{{ tutor_emoji }}</span> {{ tutor_name }}</h1>
+                <div class="chat-controls">
+                    <button onclick="zoomChat(0.1)" class="zoom-btn" title="Zoom In">A+</button>
+                    <button onclick="zoomChat(-0.1)" class="zoom-btn" title="Zoom Out">A-</button>
+                    <select id="chat-lang" class="lang-select">
+                        <option value="fr">Français</option>
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                    <span class="status-bar" id="remaining-count">Restant : 30</span>
+                </div>
+            </div>
+            
+            <div class="chat-container" id="chat-box">
+                <img src="/data/ZID1_transparent2.png" alt="Robot ZID" class="chat-robot">
+                
+                <div class="message-row bot">
+                    <div class="avatar">{{ tutor_emoji }}</div>
+                    <div class="message" id="welcome-msg"></div>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading-indicator">En train d'écrire...</div>
+            
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Écrivez votre question ici..." onkeypress="handleKeyPress(event)">
+                <button id="send-btn" onclick="sendMessage()">Envoyer</button>
+            </div>
         </div>
     </div>
 
     <script>
+        const levelTranslations = {
+            "الروض - PS": "Petite Section (PS)",
+            "الروض - MS": "Moyenne Section (MS)",
+            "الروض - GS": "Grande Section (GS)",
+            "الأول ابتدائي": "1ère Année Primaire",
+            "الثاني ابتدائي": "2ème Année Primaire",
+            "الثالث ابتدائي": "3ème Année Primaire",
+            "الرابع ابتدائي": "4ème Année Primaire",
+            "الخامس ابتدائي": "5ème Année Primaire",
+            "السادس ابتدائي": "6ème Année Primaire",
+            "الأولى إعدادي": "1ère Année Collège",
+            "الثانية إعدادي": "2ème Année Collège",
+            "الثالثة إعدادي": "3ème Année Collège",
+            "جذع مشترك علمي": "Tronc Commun Scientifique",
+            "1 باك - علوم تجريبية": "1ère Bac - Sciences Expérimentales",
+            "1 باك - علوم رياضية": "1ère Bac - Sciences Mathématiques",
+            "1 باك - علوم اقتصادية والتدبير": "1ère Bac - Sciences Économiques",
+            "2 باك - علوم فيزيائية": "2ème Bac - Sciences Physiques",
+            "2 باك - علوم اقتصادية وتدبير": "2ème Bac - Sciences Économiques"
+        };
+
         const tutor_emoji = '{{ tutor_emoji }}';
         const tutor_name = '{{ tutor_name }}';
         let currentZoom = 1;
         const studentName = localStorage.getItem('student_name') || 'Élève';
         const studentLevel = localStorage.getItem('student_level') || '';
+
+        // Update Level in Sidebar
+        const displayLevel = levelTranslations[studentLevel] || studentLevel;
+        document.getElementById('sidebar-level').innerText = "Niveau : " + displayLevel;
 
         document.getElementById('welcome-msg').innerText = `Bienvenue, ${studentName} ! Je suis ${tutor_name}, votre professeur. Comment puis-je vous aider aujourd'hui ?`;
 
