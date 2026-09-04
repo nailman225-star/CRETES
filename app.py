@@ -47,13 +47,16 @@ SUBJECTS = {
     'science': {'name': 'النشاط العلمي', 'tutor': 'الأستاذة مريم', 'emoji': '🔬', 'tutor_emoji': '👩‍🏫'},
     'communication': {'name': 'التعبير اللغوي والتواصل', 'tutor': 'الأستاذة فاطمة', 'emoji': '🗣️', 'tutor_emoji': '👩‍🏫'},
     'motor': {'name': 'الأنشطة الحسية الحركية', 'tutor': 'المدرب طارق', 'emoji': '🏃‍♂️', 'tutor_emoji': '👨‍🏫'},
-    'art': {'name': 'الأنشطة الفنية', 'tutor': 'الأستاذ بيكاسو', 'emoji': '🎨', 'tutor_emoji': '👨‍🏫'},
+    'art_preschool': {'name': 'الأنشطة الفنية والتشكيلية', 'tutor': 'الأستاذ بيكاسو', 'emoji': '🎨', 'tutor_emoji': '👨‍🏫'},
+    'math_basic': {'name': 'الاستئناس بالرياضيات والخط', 'tutor': 'الأستاذ عمر', 'emoji': '🔢', 'tutor_emoji': '👨‍🏫'},
     'islamic_basic': {'name': 'التربية الإسلامية المبسطة', 'tutor': 'الأستاذة خديجة', 'emoji': '🌙', 'tutor_emoji': '👩‍🏫'},
-    'economics': {'name': 'الاقتصاد والمحاسبة', 'tutor': 'الأستاذ آدم سميث', 'emoji': '📊', 'tutor_emoji': '👨‍🏫'},
-    'history_geo': {'name': 'التاريخ والجغرافيا', 'tutor': 'الأستاذ الإدريسي', 'emoji': '🗺️', 'tutor_emoji': '👨‍🏫'},
+    'art_primary': {'name': 'التربية الفنية والتشكيلية', 'tutor': 'الأستاذة ليلى', 'emoji': '🎨', 'tutor_emoji': '👩‍🏫'},
+    'pe': {'name': 'التربية البدنية', 'tutor': 'الكابتن سعيد', 'emoji': '⚽', 'tutor_emoji': '👨‍🏫'},
     'family_edu': {'name': 'التربية الأسرية', 'tutor': 'الأستاذة عائشة', 'emoji': '👨‍👩‍👧‍👦', 'tutor_emoji': '👩‍🏫'},
-    'informatique': {'name': 'المعلوميات', 'tutor': 'الأستاذ الخوارزمي', 'emoji': '💻', 'tutor_emoji': '👨‍🏫'},
-    'technology': {'name': 'التكنولوجيا', 'tutor': 'المهندس كريم', 'emoji': '⚙️', 'tutor_emoji': '👨‍🏫'}
+    'informatique': {'name': 'المعلوميات (الإعلاميات)', 'tutor': 'الأستاذ الخوارزمي', 'emoji': '💻', 'tutor_emoji': '👨‍🏫'},
+    'technology': {'name': 'التكنولوجيا الصناعية', 'tutor': 'المهندس كريم', 'emoji': '⚙️', 'tutor_emoji': '👨‍🏫'},
+    'art_music': {'name': 'التربية التشكيلية أو الموسيقية', 'tutor': 'الأستاذ فريد', 'emoji': '🎵', 'tutor_emoji': '👨‍🏫'},
+    'history_geo': {'name': 'التاريخ والجغرافيا', 'tutor': 'الأستاذ الإدريسي', 'emoji': '🗺️', 'tutor_emoji': '👨‍🏫'}
 }
 
 def get_subjects_for_level(level):
@@ -61,90 +64,31 @@ def get_subjects_for_level(level):
         return list(SUBJECTS.keys())
         
     if "الروض" in level:
-        return ['communication', 'motor', 'islamic_basic', 'art']
+        return ['communication', 'motor', 'islamic_basic', 'art_preschool', 'math_basic']
         
     elif "ابتدائي" in level:
         subs = ['islamic', 'arabic', 'french', 'math', 'science']
         if any(x in level for x in ["الرابع", "الخامس", "السادس"]):
             subs.append('social')
+        subs.extend(['art_primary', 'pe'])
         return subs
         
     elif "إعدادي" in level:
-        return ['islamic', 'arabic', 'french', 'english', 'math', 'physics', 'svt', 'social', 'family_edu', 'informatique', 'technology']
-        
-    elif "جذع مشترك" in level:
-        if "علمي" in level:
-            return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'informatique']
-        return ['arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'math', 'informatique']
-        
-    elif "1 باك" in level:
-        if "اقتصادية" in level:
-            return ['math', 'economics', 'french', 'english', 'philosophy', 'islamic', 'arabic', 'history_geo']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'arabic', 'french', 'english', 'islamic', 'history_geo']
-            
-    elif "2 باك" in level:
-        if "اقتصاد" in level:
-            return ['economics', 'math', 'philosophy', 'french', 'english', 'islamic']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic']
-            
-    return list(SUBJECTS.keys())
-        
-    if "الروض" in level:
-        return ['communication', 'motor', 'islamic_basic', 'art']
-        
-    elif "ابتدائي" in level:
-        subs = ['islamic', 'arabic', 'french', 'math', 'science']
-        if any(x in level for x in ["الرابع", "الخامس", "السادس"]):
-            subs.append('social')
+        subs = ['islamic', 'arabic', 'french', 'english', 'math', 'physics']
+        if any(x in level for x in ["الثانية", "الثالثة"]):
+            subs.append('svt')
+        subs.extend(['social', 'family_edu', 'technology', 'informatique', 'art_music', 'pe'])
         return subs
         
-    elif "إعدادي" in level:
-        return ['islamic', 'arabic', 'french', 'english', 'math', 'physics', 'svt', 'social']
-        
     elif "جذع مشترك" in level:
-        if "علمي" in level:
-            return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'social', 'philosophy', 'islamic']
-        return ['arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'math']
+        return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'history_geo', 'islamic', 'philosophy', 'informatique', 'pe']
         
     elif "1 باك" in level:
-        if "اقتصادية" in level:
-            return ['math', 'economics', 'french', 'english', 'philosophy', 'islamic', 'arabic', 'history_geo']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'arabic', 'french', 'english', 'islamic', 'history_geo']
+        return ['math', 'physics', 'svt', 'philosophy', 'arabic', 'french', 'english', 'history_geo', 'islamic', 'pe']
             
     elif "2 باك" in level:
-        if "اقتصاد" in level:
-            return ['economics', 'math', 'philosophy', 'french', 'english', 'islamic']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic']
+        return ['physics', 'math', 'svt', 'philosophy', 'arabic', 'french', 'english', 'history_geo', 'islamic']
             
-    return list(SUBJECTS.keys())
-    if "الروض" in level:
-        return ['communication', 'motor', 'islamic_basic', 'art']
-    elif "ابتدائي" in level:
-        subs = ['islamic', 'arabic', 'french', 'math', 'science']
-        if "الخامس" in level or "السادس" in level or "الرابع" in level:
-            subs.append('social')
-        return subs
-    elif "إعدادي" in level:
-        return ['islamic', 'arabic', 'french', 'english', 'math', 'physics', 'svt', 'social']
-    elif "جذع مشترك" in level:
-        if "علمي" in level or "تكنولوجي" in level:
-            return ['math', 'physics', 'svt', 'arabic', 'french', 'english', 'social', 'philosophy', 'islamic']
-        else:
-            return ['arabic', 'french', 'english', 'social', 'philosophy', 'islamic', 'math']
-    elif "1 باك" in level:
-        if "اقتصادية" in level:
-            return ['math', 'economics', 'french', 'english', 'philosophy', 'islamic', 'arabic', 'social']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic', 'arabic']
-    elif "2 باك" in level:
-        if "اقتصاد" in level:
-            return ['economics', 'math', 'philosophy', 'french', 'english', 'islamic']
-        else:
-            return ['math', 'physics', 'svt', 'philosophy', 'french', 'english', 'islamic']
     return list(SUBJECTS.keys())
 
 def get_system_prompt(subject_id, language, student_name="التلميذ", student_level=""):
