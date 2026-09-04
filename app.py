@@ -1,5 +1,6 @@
 import os
 from datetime import date
+from curriculum import get_curriculum
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import requests
 import pypdf
@@ -223,15 +224,14 @@ def index():
 def serve_data(filename):
     return send_from_directory("DATA", filename)
 
-@app.route("/subject/<subject_id>")
+@app.route('/subject/<subject_id>')
 def subject_page(subject_id):
     if subject_id not in SUBJECTS:
         return "المادة غير موجودة", 404
     sub = SUBJECTS[subject_id]
     
-    # Receive the educational level from query parameter (for dynamic titles)
     student_level = request.args.get('level', '')
-    
+    curriculum = get_curriculum(student_level, subject_id)
     title_suffix = f" - {student_level}" if student_level else ""
 
     return render_template("subject.html", 
@@ -239,7 +239,8 @@ def subject_page(subject_id):
                            subject_name=sub["name"] + title_suffix, 
                            tutor_name=sub["tutor"], 
                            tutor_emoji=sub["tutor_emoji"],
-                           student_level=student_level)
+                           student_level=student_level,
+                           curriculum=curriculum)
 
 @app.route("/api/chat", methods=["POST"])
 def chat():

@@ -141,18 +141,35 @@
         <div class="sidebar-level" id="sidebar-level">Niveau : ...</div>
         
         <div class="sidebar-section">
-            <h3>📚 Cours et Leçons</h3>
+            <h3>📚 Semestre 1</h3>
             <ul>
-                <li><a href="#">Unité 1 : Introduction</a></li>
-                <li><a href="#">Unité 2 : Concepts Clés</a></li>
-                <li><a href="#">Unité 3 : Approfondissement</a></li>
+                {% if curriculum and curriculum.semester_1 %}
+                    {% for lesson in curriculum.semester_1 %}
+                        <li><a href="#">{{ lesson }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <li><a href="#">Programme en cours...</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <h3>📚 Semestre 2</h3>
+            <ul>
+                {% if curriculum and curriculum.semester_2 %}
+                    {% for lesson in curriculum.semester_2 %}
+                        <li><a href="#">{{ lesson }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <li><a href="#">Programme en cours...</a></li>
+                {% endif %}
             </ul>
         </div>
         <div class="sidebar-section">
             <h3>📝 Exercices et Examens</h3>
             <ul>
-                <li><a href="#">Exercices Pratiques</a></li>
-                <li><a href="#">Contrôles</a></li>
+                <li><a href="#">Séries d'exercices</a></li>
+                <li><a href="#">Contrôles continus</a></li>
+                <li><a href="#">Examens régionaux/nationaux</a></li>
             </ul>
         </div>
         <a href="/dashboard" class="back-btn">🔙 Retour à l'accueil</a>
